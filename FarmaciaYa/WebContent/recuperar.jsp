@@ -57,10 +57,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 hidden-xs hidden-sm">
-					<h3 class="titulo-inicio">Recuperar Contraseña</h1>
+					<h3 >Recuperar Contraseña</h3>
 					<p>Ingrese la dirección su dirección de correo</p>
 					<p>recibirá un mail con los pasos a seguir</p>
-					<p><a href="#" class="btn btn-primary btn-lg">Leer mas</a></p>
+					
 				</div>
 
 				<div class="col-xs-6">
