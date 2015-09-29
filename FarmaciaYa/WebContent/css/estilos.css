@@ -1,0 +1,17 @@
+/* --  HEADER -- */
+.navbar {
+	margin-bottom: 0;
+}
+
+.jumbotron-inicio {
+	/*background:#428BCA;*/
+	/*color:#fff;*/ 
+	padding: 80px 0;
+}
+
+.jumbotron-inicio .titulo-inicio {
+	font-size: 80px;
+}
+
+.footer {
+}
