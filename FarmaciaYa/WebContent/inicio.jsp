@@ -44,7 +44,7 @@
 						</div>
 						<div class="row">
 							<ul class="text-center">
-								<li><a href="#">Olvido su contraseña?</a></li>
+								<li><a href="recuperar.jsp">Olvido su contraseña?</a></li>
 							</ul>
 						</div>
 					</form>
@@ -68,7 +68,7 @@
 				<div class="col-xs-6">
 					<div class="text-center">
 						<br>
-					<form action="" method="post">
+					<form action="/Inicio" method="post">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Nombre:</span>
