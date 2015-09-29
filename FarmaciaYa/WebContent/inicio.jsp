@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 			<div class="container">
