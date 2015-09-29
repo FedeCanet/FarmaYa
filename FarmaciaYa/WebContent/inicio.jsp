@@ -24,7 +24,7 @@
 					<a href="#" class="navbar-brand">FarmaciaYa.com</a>
 				</div>
 
-				<!-- MENU -->
+				<!-- MENU Prueba -->
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Inicio</a></li>
