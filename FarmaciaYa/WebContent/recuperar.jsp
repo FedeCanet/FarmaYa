@@ -44,7 +44,7 @@
 						</div>
 						<div class="row">
 							<ul class="text-center">
-								<li><a href="recuperar.jsp">Olvido su contraseña?</a></li>
+								<li><a href="#">Olvido su contraseña?</a></li>
 							</ul>
 						</div>
 					</form>
@@ -57,11 +57,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 hidden-xs hidden-sm">
-					<h1 class="titulo-inicio">Farmacia Ya</h1>
-					<p>Bienvenido a FarmaciaYa el sitio por excelencia</p>
-					<p>para pedir productos farmacéuticos.</p>
-					<p>Más de 250 Farmacias disponibles</p>
-					<p>24/7</p>
+					<h3 class="titulo-inicio">Recuperar Contraseña</h1>
+					<p>Ingrese la dirección su dirección de correo</p>
+					<p>recibirá un mail con los pasos a seguir</p>
 					<p><a href="#" class="btn btn-primary btn-lg">Leer mas</a></p>
 				</div>
 
@@ -71,39 +69,11 @@
 					<form action="" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon">Nombre:</span>
-								<input type="text" name="nombre" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon">Apellido:</span>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon">Dirección:</span>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
 								<span class="input-group-addon">Correo:</span>
 								<input type="text" class="form-control">
 							</div>
 						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon">Contraseña:</span>
-								<input type="text" class="form-control">
-							</div>
-						</div>
-												
+										
 						<button type="submit" name="Submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
 					</FORM>
 					</div>

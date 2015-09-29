@@ -13,5 +13,9 @@
 	font-size: 80px;
 }
 
+.form-control {
+width: 100%;
+}
+
 .footer {
 }
