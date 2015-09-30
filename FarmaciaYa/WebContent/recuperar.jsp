@@ -27,7 +27,7 @@
 				<!-- MENU -->
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Inicio</a></li>
+						<li class="active"><a href="inicio.jsp">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
 
