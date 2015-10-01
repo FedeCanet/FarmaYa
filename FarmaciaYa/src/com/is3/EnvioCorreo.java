@@ -27,7 +27,7 @@ public class EnvioCorreo {
 	
 		mailMessage.setSubject(Parameters.getParameter("recuperarPasswordSubject"));
 		
-		String urlLink = Parameters.getParameter("urlRecoverPassword")+"?"+correo;
+		String urlLink = Parameters.getParameter("urlRecoverPassword")+"?userid="+correo;
 		
 		String emailBody = Parameters.getParameter("recuperarPasswordBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
 		mailMessage.setContent(emailBody, "text/html");
