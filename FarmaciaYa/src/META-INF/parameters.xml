@@ -2,4 +2,7 @@
 <parameters>
 	<correo>yomevoyalafarmacia@gmail.com</correo>
 	<password>farmaciaya2015</password>
+	<recuperarPasswordSubject>FarmaYa! - Servicio de Recuperación de Contraseña</recuperarPasswordSubject>
+	<recuperarPasswordBody>Usted ha solicitado cambiar su contraseña, para cambiarla click #link#</recuperarPasswordBody>
+	<urlRecoverPassword>http://localhost:8080/FarmaciaYa/cambiocontrasena.jsp</urlRecoverPassword>
 </parameters>

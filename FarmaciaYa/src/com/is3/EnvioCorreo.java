@@ -7,26 +7,34 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 public class EnvioCorreo {
  
 	static Properties mailServerProperties;
 	static Session getMailSession;
 	
-	public static void main(String args[]) throws AddressException, MessagingException {
+	public static void main(String args[])throws AddressException, MessagingException {
+		String correo = "gdotta30@gmail.com";
+		
+		EnvioCorreo.enviarCorreoRecuperarPassword(correo);
+	}
+	
+	public static void enviarCorreoRecuperarPassword(String correo) throws AddressException, MessagingException {
+		
 		MimeMessage mailMessage = new MimeMessage(getMailSession);
-		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("gdotta@simplificasoftware.com"));
-		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("pblancodepons@gmail.com"));
-
-	//	mailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("fedeea@gmail.com"));
-	//	mailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("nicojfernandez@gmail.com"));
-	//	mailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("marrerog.joseluis@gmail.com"));
-		mailMessage.setSubject("IMPORTANTE2222, LEER URGENTE.");
-		String emailBody = "Puto el que lee" + "<br><br> Regards, <br>Colo Colo.";
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(correo));
+	
+		mailMessage.setSubject(Parameters.getParameter("recuperarPasswordSubject"));
+		
+		String urlLink = Parameters.getParameter("urlRecoverPassword")+"?"+correo;
+		
+		String emailBody = Parameters.getParameter("recuperarPasswordBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
 		mailMessage.setContent(emailBody, "text/html");
-		enviarCorreo(mailMessage);
+		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
 	}
+	
  
 	public static void enviarCorreo(MimeMessage mailMessage) throws AddressException, MessagingException {
 		
