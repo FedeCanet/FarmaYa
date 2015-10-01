@@ -13,8 +13,9 @@
 	font-size: 80px;
 }
 
-.form-control {
-width: 100%;
+.col-xs-13 {
+  width: 95%;
+  padding: 10px;
 }
 
 .footer {
