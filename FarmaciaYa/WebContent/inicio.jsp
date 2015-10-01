@@ -24,10 +24,10 @@
 					<a href="#" class="navbar-brand">FarmaciaYa.com</a>
 				</div>
 
-				<!-- MENU -->
+				<!-- MENU Prueba -->
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Inicio</a></li>
+						<li class="active"><a href="inicio.jsp">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
 
@@ -65,10 +65,10 @@
 					<p><a href="#" class="btn btn-primary btn-lg">Leer mas</a></p>
 				</div>
 
-				<div class="col-xs-6">
+				<div class="col-xs-13">
 					<div class="text-center">
 						<br>
-					<form action="" method="post">
+					<form action="/Inicio" method="post">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Nombre:</span>
@@ -118,7 +118,7 @@
 				<div class="col-xs-6">
 					<p>Ingeniería de Software III</p>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-xs-13">
 					<ul class="list-inline text-right">
 						<li><a href="#">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>

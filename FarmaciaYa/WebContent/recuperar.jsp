@@ -27,7 +27,7 @@
 				<!-- MENU -->
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Inicio</a></li>
+						<li class="active"><a href="inicio.jsp">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
 
@@ -58,8 +58,7 @@
 			<div class="row">
 				<div class="col-xs-6 hidden-xs hidden-sm">
 					<h3 >Recuperar Contraseña</h3>
-					<p>Ingrese la dirección su dirección de correo</p>
-					<p>recibirá un mail con los pasos a seguir</p>
+					<p>Ingrese la dirección su dirección de correo, recibirá un mail con los pasos a seguir</p>
 					
 				</div>
 
@@ -85,7 +84,7 @@
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-6">
+				<div class="col-xs-13">
 					<p>Ingeniería de Software III</p>
 				</div>
 				<div class="col-xs-6">
