@@ -67,13 +67,13 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Contraseña:</span>
-								<input name="contrasena" type="text" class="form-control">
+								<input type="password" name="contrasena" type="text" class="form-control">
 							</div>
 						</div>	
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Repita Contraseña:</span>
-								<input name="contrasenaRepetida" type="text" class="form-control">
+								<input type="password" name="contrasenaRepetida" type="text"  class="form-control">
 							</div>
 						</div>
 										
