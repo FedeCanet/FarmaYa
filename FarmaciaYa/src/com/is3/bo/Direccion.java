@@ -24,7 +24,7 @@ public class Direccion implements Serializable {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")
-    private String descripción;
+    private String descripcion;
 
 	public long getId() {
 		return id;
@@ -34,12 +34,12 @@ public class Direccion implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescripción() {
-		return descripción;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 }
