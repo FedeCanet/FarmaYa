@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,9 +20,14 @@ public class Direccion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaDireccion")
 	private long id;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")
-    private String descripcion;
+//	@ManyToOne(optional = true)
+//	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")
+    private String calle;
+    
+    private int numeroDePuerta;
+    
+    private String numeroAPTO;
+    
 
 	public long getId() {
 		return id;
@@ -34,12 +37,29 @@ public class Direccion implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getCalle() {
+		return calle;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+
+	public int getNumeroDePuerta() {
+		return numeroDePuerta;
+	}
+
+	public void setNumeroDePuerta(int numeroDePuerta) {
+		this.numeroDePuerta = numeroDePuerta;
+	}
+
+	public String getNumeroAPTO() {
+		return numeroAPTO;
+	}
+
+	public void setNumeroAPTO(String numeroAPTO) {
+		this.numeroAPTO = numeroAPTO;
 	}
 	
 }
