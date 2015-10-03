@@ -27,8 +27,9 @@ public class PersistenceHelper {
 		u.setApellido(app);
 		u.setFechaCreacion(new Date(System.currentTimeMillis()));
 		u.setPassword(pass);
-		//u.setEmail(correo);
-		//u.setIdDireccion(2);
+		u.setCorreo(correo);
+		
+		// direccion hay que pasarle una lista de direcciones , tenes que hacerlo despues
 		em.persist(u);
 		
 		em.getTransaction().commit();
