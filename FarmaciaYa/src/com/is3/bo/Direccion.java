@@ -21,7 +21,7 @@ public class Direccion implements Serializable {
 	private long id;
 
 //	@ManyToOne(optional = true)
-//	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")
+//	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")----
     private String calle;
     
     private int numeroDePuerta;
