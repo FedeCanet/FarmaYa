@@ -24,6 +24,8 @@ public class Direccion implements Serializable {
 //	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")----
     private String calle;
     
+    ////ESTA ES LA POSTA PUTO
+    
     private int numeroDePuerta;
     
     private String numeroAPTO;
