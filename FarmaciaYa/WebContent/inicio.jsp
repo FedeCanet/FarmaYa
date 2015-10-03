@@ -10,6 +10,44 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
+<script type="text/javascript">
+function validacion() {
+	nombre = document.getElementById("nombre").value;
+	if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre) ) {
+		alert('[ERROR] El campo Nombre debe tener un valor de.');
+	  	return false;
+	}
+
+	apellido = document.getElementById("apellido").value;
+	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+		alert('[ERROR] El campo Apellido debe tener un valor de.');
+		return false;
+	}
+	
+	apellido = document.getElementById("correo").value;
+	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+		alert('[ERROR] El campo Correo debe tener un valor de.');
+		return false;
+	}
+
+	apellido = document.getElementById("direccion").value;
+	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+		alert('[ERROR] El campo Dirección debe tener un valor de.');
+		return false;
+	}
+	
+	apellido = document.getElementById("password").value;
+	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+		alert('[ERROR] El campo Contraseña debe tener un valor de.');
+		return false;
+	}
+	return true;
+}
+
+function newPage(url){
+	window.location.href = url;
+}
+</script>
 <body>
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -68,44 +106,44 @@
 				<div class="col-xs-13">
 					<div class="text-center">
 						<br>
-					<form action="/Inicio" method="post">
+					<form action="UsuarioServlet" method="post" onsubmit="return validacion()">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Nombre:</span>
-								<input type="text" name="nombre" class="form-control">
+								<input type="text" id="nombre" name="nombre" class="form-control">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Apellido:</span>
-								<input type="text" class="form-control">
+								<input type="text" id="apellido" name="apellido" class="form-control">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Dirección:</span>
-								<input type="text" class="form-control">
+								<input type="text" id="direccion" name="direccion" class="form-control">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Correo:</span>
-								<input type="text" class="form-control">
+								<input type="text" id="correo" name="correo" class="form-control">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Contraseña:</span>
-								<input type="text" class="form-control">
+								<input type="text" id="password" name="password" class="form-control">
 							</div>
 						</div>
 												
 						<button type="submit" name="Submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-					</FORM>
+					</form>
 					</div>
 				</div>
 			</div>
@@ -118,7 +156,7 @@
 				<div class="col-xs-6">
 					<p>Ingeniería de Software III</p>
 				</div>
-				<div class="col-xs-13">
+				<div class="col-xs-6">
 					<ul class="list-inline text-right">
 						<li><a href="#">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>
