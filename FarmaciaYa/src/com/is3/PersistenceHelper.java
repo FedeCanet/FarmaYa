@@ -6,7 +6,8 @@ import java.util.HashMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import jpaObjetos.Usuario;
+
+import com.is3.bo.Usuario;
 
 public class PersistenceHelper {
 
@@ -26,8 +27,8 @@ public class PersistenceHelper {
 		u.setApellido(app);
 		u.setFechaCreacion(new Date(System.currentTimeMillis()));
 		u.setPassword(pass);
-		u.setEmail(correo);
-		u.setIdDireccion(2);
+		//u.setEmail(correo);
+		//u.setIdDireccion(2);
 		em.persist(u);
 		
 		em.getTransaction().commit();
