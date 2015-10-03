@@ -27,7 +27,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 //		@NamedQuery(name = "existeSala", query = "SELECT s FROM SalaDeJuego s WHERE (s.pos = :pos) AND s.id <> :id"),
  })
 @Entity
-@Table(name = "FARM_T_USUARIO")
+@Table(name = "FAR_T_USUARIO")
 public class Usuario implements Serializable {
 
 	/**
@@ -90,8 +90,6 @@ public class Usuario implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
 
 	public String getApellido() {
 		return apellido;
