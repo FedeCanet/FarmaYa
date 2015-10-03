@@ -16,16 +16,16 @@ public class UsuarioServlet extends HttpServlet implements Servlet {
 		// TODO Auto-generated method stub
 		super.doPost(req, resp);
 		
-		String nombre, apellido, correo, direccion, contraseña; 
+		String nombre, apellido, correo, direccion, contraseÃ±a; 
 		
 		nombre = req.getParameter("nombre");
 		apellido = req.getParameter("apellido");
 		correo = req.getParameter("correo");
 		direccion = req.getParameter("direccion");
-		contraseña = req.getParameter("password");
+		contraseÃ±a = req.getParameter("password");
 		
 		PersistenceHelper persistHelper = new PersistenceHelper();
-		persistHelper.addUsuario(nombre,  apellido, correo, direccion, contraseña);
+		persistHelper.addUsuario(nombre,  apellido, correo, direccion, contraseÃ±a);
 	}
 
 	@Override
