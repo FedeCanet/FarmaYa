@@ -11,6 +11,22 @@
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("user") == null){
+	response.sendRedirect("inicio.jsp");
+}else user = (String) session.getAttribute("user");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 			<div class="container">
@@ -27,15 +43,15 @@
 				<!-- MENU Prueba -->
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="inicio.jsp">Inicio</a></li>
+						<!-- <li class="active"><a href="inicio.jsp">Inicio</a></li> -->
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
 
-					<form action="" class="navbar-form navbar-right" role="loggin">
+					<form action="LogoutServlet" method="post" class="navbar-form navbar-right" role="loggin">
 						<div class="row">						
 							<div class="form-group">
 							<span class="glyphicon glyphicon-user"></span>
-								<a>nombre@correo.com</a>
+								<a><%=user %></a>
 							</div>						
 							<button type="submit" class="btn btn-primary">
 								<span class="glyphicon glyphicon-off"></span>
