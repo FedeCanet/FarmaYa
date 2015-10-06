@@ -49,6 +49,13 @@ function newPage(url){
 }
 </script>
 <body>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("user") != null){
+	response.sendRedirect("busqueda.jsp");
+}
+%>
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 			<div class="container">
@@ -69,11 +76,11 @@ function newPage(url){
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
 
-					<form action="" class="navbar-form navbar-right" role="loggin">
+					<form action="LoginServlet" method="post" class="navbar-form navbar-right" role="loggin">
 						<div class="row">						
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Correo">
-								<input type="text" class="form-control" placeholder="Contraseña">
+								<input type="text" name="user" class="form-control" placeholder="Correo">
+								<input type="password" name="pwd" class="form-control" placeholder="Contraseña">								
 							</div>						
 							<button type="submit" class="btn btn-primary">
 								<span class="glyphicon glyphicon-ok"></span>
@@ -81,6 +88,12 @@ function newPage(url){
 							</button>
 						</div>
 						<div class="row">
+								<font color=red><%
+							    if(null!=request.getAttribute("errorMessage"))
+							    {
+							        out.println(request.getAttribute("errorMessage"));
+							    }
+							%></font>
 							<ul class="text-center">
 								<li><a href="recuperar.jsp">Olvido su contraseña?</a></li>
 							</ul>
@@ -138,7 +151,7 @@ function newPage(url){
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Contraseña:</span>
-								<input type="text" id="password" name="password" class="form-control">
+								<input type="password" id="password" name="password" class="form-control">
 							</div>
 						</div>
 												
