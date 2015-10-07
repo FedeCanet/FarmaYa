@@ -8,30 +8,10 @@
   <description>Proyecto Ingenieria 3</description>
   <dependencies>
     <dependency>
-      <groupId>antlr</groupId>
-      <artifactId>antlr</artifactId>
-      <version>2.7.7</version>
-    </dependency>
-    <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
       <version>4.3.8.Final</version>
       <scope/>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss</groupId>
-      <artifactId>jandex</artifactId>
-      <version>1.1.0.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.javassist</groupId>
-      <artifactId>javassist</artifactId>
-      <version>3.18.1-GA</version>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>
