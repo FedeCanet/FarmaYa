@@ -14,6 +14,8 @@ public class Parameters{
 	public static String getParameter(String key){
 		String value = null; 
 	    SAXBuilder builder = new SAXBuilder();
+	    //String dir = "\\properties\\parameters.xml";
+	    //File xmlFile = new File( dir );
 	    File xmlFile = new File( "src\\META-INF\\parameters.xml" );
 	    try
 	    {

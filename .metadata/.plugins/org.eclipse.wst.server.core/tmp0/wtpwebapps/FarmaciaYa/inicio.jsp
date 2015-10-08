@@ -169,7 +169,7 @@ if(session.getAttribute("user") != null){
 				<div class="col-xs-6">
 					<p>Ingeniería de Software III</p>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-xs-13">
 					<ul class="list-inline text-right">
 						<li><a href="#">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>

@@ -3,6 +3,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
+
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script>
+    var hash = CryptoJS.MD5("Message");
+</script>
+
+<script type="text/javascript">
+
+psswd = Document.GetElementById("contrasena")
+
+
+</script>
 	<meta charset="UTF-8">
 	<title>Farmacia Ya</title>
 	<!--  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  -->
@@ -61,13 +73,16 @@
 				</div>
 
 				<div class="col-xs-6">
+				<% int javavar = 8;
+					String UserID = getParameters("userid");
+				%>
 					<div class="text-center">
 						<br>
 					<form action="" method="post">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Contraseña:</span>
-								<input type="password" name="contrasena" type="text" class="form-control">
+								<input type="password" name="contrasena" id="contrasena" type="text" class="form-control">
 							</div>
 						</div>	
 						<div class="form-group">

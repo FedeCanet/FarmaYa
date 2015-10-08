@@ -10,6 +10,18 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
+<script type="text/javascript">
+function validacionRecuperar() {
+	correo = document.getElementById("correo").value;
+	
+	if( correo == null || correo.length == 0 || /^\s+$/.test(correo) ) {
+		alert('[ERROR] El campo Correo debe tener un valor.');
+	  	return false;
+	}
+
+	return true;
+}
+</script>
 <body>
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -65,16 +77,16 @@
 				<div class="col-xs-6">
 					<div class="text-center">
 						<br>
-					<form action="" method="post">
+					<form action="RecoverPasswordServlet" method="post" onsubmit="return validacionRecuperar()">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Correo:</span>
-								<input type="text" class="form-control">
+								<input type="text" id="correo" name="correo" class="form-control">
 							</div>
 						</div>
 										
 						<button type="submit" name="Submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-					</FORM>
+					</form>
 					</div>
 				</div>
 			</div>
