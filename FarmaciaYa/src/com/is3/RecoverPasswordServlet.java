@@ -30,7 +30,7 @@ public class RecoverPasswordServlet extends HttpServlet implements Servlet {
 		
 		//RequestDispatcher rd = getServletContext().getRequestDispatcher("/inicio.jsp");//("/login.html");
 		//request.setAttribute("errorMessage", "Usuario y/o Password incorrectos.");
-		RequestDispatcher rd = request.getRequestDispatcher("/inicio.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/recuperar.jsp");
         rd.forward(request, response);
 		
 		//PrintWriter out= response.getWriter();

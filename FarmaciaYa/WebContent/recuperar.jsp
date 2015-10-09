@@ -10,18 +10,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
-<script type="text/javascript">
-function validacionRecuperar() {
-	correo = document.getElementById("correo").value;
-	
-	if( correo == null || correo.length == 0 || /^\s+$/.test(correo) ) {
-		alert('[ERROR] El campo Correo debe tener un valor.');
-	  	return false;
-	}
 
-	return true;
-}
-</script>
 <body>
 	<header>
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -65,6 +54,14 @@ function validacionRecuperar() {
 		</nav>
 	</header>
 	
+	
+<%	
+
+if(null==request.getParameter("correo"))
+{  
+%>
+
+	
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
 			<div class="row">
@@ -77,11 +74,11 @@ function validacionRecuperar() {
 				<div class="col-xs-6">
 					<div class="text-center">
 						<br>
-					<form action="RecoverPasswordServlet" method="post" onsubmit="return validacionRecuperar()">
+					<form action="RecoverPasswordServlet" method="post" data-toggle="validator">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Correo:</span>
-								<input type="text" id="correo" name="correo" class="form-control">
+								<input type="email" id="correo" name="correo" class="form-control"  data-error="Ingresa un mail válido" required>
 							</div>
 						</div>
 										
@@ -92,7 +89,27 @@ function validacionRecuperar() {
 			</div>
 		</div>
 	</section>
-	
+<%
+}
+else
+{
+%>
+
+	<section class="jumbotron jumbotron-inicio">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-13">
+					<h3 >Correo Enviado a <% out.println(request.getParameter("correo")); %>!</h3>
+					<p>Te hemos enviado un correo electrónico a tu casilla, en el hay instrucciones con los pasos a seguir.</p>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+<%	
+}
+%>	
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
