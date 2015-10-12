@@ -60,8 +60,8 @@ else
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-13">
-					<h3 >Correo Enviado a <% out.println(request.getParameter("correo")); %>!</h3>
-					<p>Te hemos enviado un correo electrónico a tu casilla, en el hay instrucciones con los pasos a seguir.</p>
+					<h3 ><% out.println(request.getAttribute("title")); %></h3>
+					<p><% out.println(request.getAttribute("text")); %></p>
 					
 				</div>
 			</div>

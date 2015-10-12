@@ -11,18 +11,18 @@
 					<a href="#" class="navbar-brand">FarmaciaYa.com</a>
 				</div>
 
-				<!-- MENU -->
+				<!-- MENU Prueba -->
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="inicio.jsp">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
 
-					<form action="" class="navbar-form navbar-right" role="loggin">
+					<form action="LoginServlet" method="post" class="navbar-form navbar-right" role="loggin">
 						<div class="row">						
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Correo">
-								<input type="text" class="form-control" placeholder="Contraseña">
+								<input type="text" name="user" class="form-control" placeholder="Correo">
+								<input type="password" name="pwd" class="form-control" placeholder="Contraseña">								
 							</div>						
 							<button type="submit" class="btn btn-primary">
 								<span class="glyphicon glyphicon-ok"></span>
@@ -30,8 +30,14 @@
 							</button>
 						</div>
 						<div class="row">
+								<font color=red><%
+							    if(null!=request.getAttribute("errorMessage"))
+							    {
+							        out.println(request.getAttribute("errorMessage"));
+							    }
+							%></font>
 							<ul class="text-center">
-								<li><a href="#">Olvido su contraseña?</a></li>
+								<li><a href="recuperar.jsp">Olvido su contraseña?</a></li>
 							</ul>
 						</div>
 					</form>

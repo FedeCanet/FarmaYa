@@ -23,9 +23,14 @@ public class RecoverPasswordServlet extends HttpServlet implements Servlet {
 		
 		try {
 			EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
+			String MsgExito = "Correo Enviado a " + correo + "!";
+			request.setAttribute("title", MsgExito);
+			request.setAttribute("text", "Te hemos enviado un correo electrónico a tu casilla, en el hay instrucciones con los pasos a seguir.");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("title", "Hubo un malentendido...");
+			request.setAttribute("text", "No se pudo enviar el mail");
 		}
 		
 		//RequestDispatcher rd = getServletContext().getRequestDispatcher("/inicio.jsp");//("/login.html");
