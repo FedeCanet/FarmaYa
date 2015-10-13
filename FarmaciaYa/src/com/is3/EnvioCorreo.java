@@ -75,4 +75,9 @@ public class EnvioCorreo {
 		transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
 		transport.close();
 	}
+	
+	public static boolean verificarCorreo(String correo)
+	{
+		return true;
+	}
 }

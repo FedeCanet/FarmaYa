@@ -37,7 +37,7 @@
 							    }
 							%></font>
 							<ul class="text-center">
-								<li><a href="recuperar.jsp">Olvido su contraseña?</a></li>
+								<li><a href="recuperar.jsp">Olvidó su contraseña?</a></li>
 							</ul>
 						</div>
 					</form>
