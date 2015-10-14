@@ -2,7 +2,10 @@ package com.is3;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -14,8 +17,7 @@ public class Parameters{
 	public static String getParameter(String key){
 		String value = null; 
 	    SAXBuilder builder = new SAXBuilder();
-	    //String dir = "\\properties\\parameters.xml";
-	    //File xmlFile = new File( dir );
+	    
 	    File xmlFile = new File( "src\\META-INF\\parameters.xml" );
 	    try
 	    {
