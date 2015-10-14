@@ -16,7 +16,7 @@ public class EnvioCorreo {
 	public static void main(String args[])throws AddressException, MessagingException {
 		String correo = "gdotta30@gmail.com";
 		
-		EnvioCorreo.enviarCorreoRecuperarPassword(correo);
+		EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
 	}
 	
 	public static void enviarCorreoRecuperarPassword(String correo) throws AddressException, MessagingException {
@@ -34,7 +34,21 @@ public class EnvioCorreo {
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
 	}
 	
- 
+	public static void enviarCorreoConfirmarUsuario(String correo) throws AddressException, MessagingException {
+		
+		MimeMessage mailMessage = new MimeMessage(getMailSession);
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(correo));
+	
+		mailMessage.setSubject(Parameters.getParameter("confirmarUsuarioSubject"));
+		
+		String urlLink = Parameters.getParameter("urlConfirmarUsuario")+"?userid="+correo;
+		
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		mailMessage.setContent(emailBody, "text/html");
+		EnvioCorreo.enviarCorreo(mailMessage);
+		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
+	}
+	
 	public static void enviarCorreo(MimeMessage mailMessage) throws AddressException, MessagingException {
 		
 		String userGmail = Parameters.getParameter("correo");
@@ -60,5 +74,10 @@ public class EnvioCorreo {
 		transport.connect("smtp.gmail.com", userGmail, password);
 		transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
 		transport.close();
+	}
+	
+	public static boolean verificarCorreo(String correo)
+	{
+		return true;
 	}
 }
