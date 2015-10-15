@@ -1,5 +1,7 @@
 package com.is3;
+import java.math.BigDecimal;
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -8,16 +10,57 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.is3.bo.Orden;
+import com.is3.bo.Producto;
+
+import dto.Posicion;
+
 public class EnvioCorreo {
  
 	static Properties mailServerProperties;
 	static Session getMailSession;
 	
 	public static void main(String args[])throws AddressException, MessagingException {
-		String correo = "gdotta30@gmail.com";
+		try {
+			Posicion p = new Posicion();
+			p.getDirCiuByLatLong(new BigDecimal("-34.899124"), new BigDecimal("-56.1454787"));
+			System.out.println(p.getDireccion());
+			System.out.println(p.getCiudad());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//String correo = "gdotta30@gmail.com";
 		
-		EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
+		//EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
 	}
+	
+	public static void enviarCorreoPedidoRegistrado(Orden orden) throws AddressException, MessagingException {
+				
+		MimeMessage mailMessage = new MimeMessage(getMailSession);
+		mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(orden.getUsuario().getCorreo()));
+		
+		mailMessage.setSubject(Parameters.getParameter("pedidoRegistradoSubject"));
+		
+		String emailBody = "";//Parameters.getParameter("pedidoRegistradoBody").replace("#farmacia#",orden.obtenerFarmaciaNombre());
+		
+		BigDecimal total = BigDecimal.ZERO;
+		String listaPedido = "<table>";
+		for (Producto p: orden.getProductos()){
+			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td></tr>";
+			total = total.add(p.getPrecioUnitario());
+		}
+		listaPedido += "<tr><td style=\"height: 20px;\"></td><td></td></tr>";
+		listaPedido += "<tr><td>Total</td><td>"+total.toString()+"</td></tr></table>";
+		
+		emailBody = emailBody.replace("#detalleOrden#", listaPedido);
+		
+		mailMessage.setContent(emailBody, "text/html");
+		EnvioCorreo.enviarCorreo(mailMessage);
+		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
+	}
+
 	
 	public static void enviarCorreoRecuperarPassword(String correo) throws AddressException, MessagingException {
 		

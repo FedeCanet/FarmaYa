@@ -132,6 +132,8 @@ public class Usuario implements Serializable {
 	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
 	}
-	
+	public String getNombreCompleto(){
+		return this.getNombre()+" "+this.getApellido();
+	}
 	
 }
