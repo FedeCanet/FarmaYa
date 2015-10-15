@@ -1,5 +1,6 @@
 package com.is3.bo;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,11 +24,14 @@ public class Direccion implements Serializable {
 //	@ManyToOne(optional = true)
 //	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")----
     private String calle;
-    
-    
+         
     private int numeroDePuerta;
     
     private String numeroAPTO;
+    
+    private BigDecimal latitud;
+    
+    private BigDecimal longitud;
     
 
 	public long getId() {
@@ -62,5 +66,23 @@ public class Direccion implements Serializable {
 	public void setNumeroAPTO(String numeroAPTO) {
 		this.numeroAPTO = numeroAPTO;
 	}
+
+	public BigDecimal getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(BigDecimal latitud) {
+		this.latitud = latitud;
+	}
+
+	public BigDecimal getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(BigDecimal longitud) {
+		this.longitud = longitud;
+	}
+	
+	
 	
 }

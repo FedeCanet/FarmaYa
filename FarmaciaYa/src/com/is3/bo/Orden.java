@@ -1,9 +1,9 @@
 package com.is3.bo;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -56,8 +56,7 @@ public class Orden implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
 	private FormaPago formaDePAgo;
 	
-	private String aclaracion;
-	
+	private String aclaracion;	
 	private float puntaje;
 	
 	public long getId() {
