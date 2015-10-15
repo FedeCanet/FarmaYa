@@ -23,16 +23,16 @@ psswd = Document.GetElementById("contrasena")
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-<%@include file="Includes/header.jsp" %>
+<%@include file="Includes/headerNoLogin.jsp" %>
 	
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-6 hidden-xs hidden-sm">
+				<div class="col-xs-12 col-sm-6">
 					<h3 >Ingrese nueva contraseña</h3>
 				</div>
 
-				<div class="col-xs-6">
+				<div class="col-xs-12 col-sm-6">
 				<% int javavar = 8;
 					String UserID = request.getParameter("userid");
 				%>
