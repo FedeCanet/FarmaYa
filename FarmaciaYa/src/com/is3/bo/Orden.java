@@ -56,6 +56,9 @@ public class Orden implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
 	private FormaPago formaDePAgo;
 	
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
+	private Farmacia farmacia;
+	
 	private String aclaracion;	
 	private float puntaje;
 	
@@ -123,4 +126,13 @@ public class Orden implements Serializable {
 		this.puntaje = puntaje;
 	}
 
+	public Farmacia getFarmacia() {
+		return farmacia;
+	}
+
+	public void setFarmacia(Farmacia farmacia) {
+		this.farmacia = farmacia;
+	}
+
+	
 }
