@@ -10,7 +10,21 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+
+<script type="text/javascript">
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    alert("Latitude: " + position.coords.latitude +" Longitude: " + position.coords.longitude);
+}
+</script>
+<body onload="getLocation()">
 <%
 //allow access only if session exists
 String user = null;
@@ -29,7 +43,6 @@ for(Cookie cookie : cookies){
 %>
 <%@include file="Includes/header.jsp" %>	
 	
-
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
 			<div class="row">
