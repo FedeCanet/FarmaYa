@@ -29,6 +29,8 @@ public class Direccion implements Serializable {
     
     private String numeroAPTO;
     
+    private String ciudad;
+    
     private BigDecimal latitud;
     
     private BigDecimal longitud;
@@ -81,6 +83,14 @@ public class Direccion implements Serializable {
 
 	public void setLongitud(BigDecimal longitud) {
 		this.longitud = longitud;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 	
 	
