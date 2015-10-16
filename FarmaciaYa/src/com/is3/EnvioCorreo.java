@@ -22,11 +22,11 @@ public class EnvioCorreo {
 	
 	public static void main(String args[])throws AddressException, MessagingException {
 		try {
-			Posicion p = new Posicion();
+		/*	Posicion p = new Posicion();
 			p.getDirCiuByLatLong(new BigDecimal("-34.899124"), new BigDecimal("-56.1454787"));
 			System.out.println(p.getDireccion());
 			System.out.println(p.getCiudad());
-
+*/
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,7 +43,9 @@ public class EnvioCorreo {
 		
 		mailMessage.setSubject(Parameters.getParameter("pedidoRegistradoSubject"));
 		
-		String emailBody = "";//Parameters.getParameter("pedidoRegistradoBody").replace("#farmacia#",orden.obtenerFarmaciaNombre());
+		String emailBody = Parameters.getParameter("pedidoRegistradoBody").replace("#cliente#",orden.getUsuario().getNombreCompleto());
+		
+		emailBody = emailBody.replace("#farmacia#",orden.getFarmacia().getNombre());
 		
 		BigDecimal total = BigDecimal.ZERO;
 		String listaPedido = "<table>";
