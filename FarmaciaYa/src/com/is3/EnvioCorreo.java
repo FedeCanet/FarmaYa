@@ -94,7 +94,7 @@ public class EnvioCorreo {
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
 	}
 	
-	public static void enviarCorreo(MimeMessage mailMessage) throws AddressException, MessagingException {
+	private static void enviarCorreo(MimeMessage mailMessage) throws AddressException, MessagingException {
 		
 		String userGmail = Parameters.getParameter("correo");
 		String password = Parameters.getParameter("password");
