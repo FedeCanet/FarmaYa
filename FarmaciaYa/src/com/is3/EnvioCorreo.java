@@ -1,5 +1,7 @@
 package com.is3;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,11 +11,14 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
-
-import dto.Posicion;
+import com.is3.dto.Posicion;
 
 public class EnvioCorreo {
  
@@ -123,6 +128,27 @@ public class EnvioCorreo {
 	
 	public static boolean verificarCorreo(String correo)
 	{
-		return true;
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Query queryCinco = em.createQuery("SELECT u.correo " +
+				"FROM Usuario u " +
+				"where u.correo = :correo");
+
+		queryCinco.setParameter("correo", correo);
+		
+		ArrayList usuarios = (ArrayList)queryCinco.getResultList();
+		
+		em.getTransaction().commit();
+		em.close();
+		emf.close();
+		
+		if(usuarios.size() > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
