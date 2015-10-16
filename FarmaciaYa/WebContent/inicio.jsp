@@ -49,7 +49,7 @@ function newPage(url){
 }
 </script>
 
-<body onload="getLocation()">
+<body>
 <%
 //allow access only if session exists
 String user = null;

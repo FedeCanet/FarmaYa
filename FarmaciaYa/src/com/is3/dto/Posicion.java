@@ -1,4 +1,4 @@
-package dto;
+package com.is3.dto;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,6 +14,9 @@ public class Posicion {
 	private String direccion;
 	private String ciudad;
 	
+	public Posicion(){
+		
+	}
 	public Posicion(Direccion d){
 		this.latitud = d.getLatitud();
 		this.longitud = d.getLongitud();

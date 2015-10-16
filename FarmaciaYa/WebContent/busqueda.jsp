@@ -14,14 +14,25 @@
 <script type="text/javascript">
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showDireccion);
     } else {
         alert("Geolocation is not supported by this browser.");
     }
 }
 
-function showPosition(position) {
-    alert("Latitude: " + position.coords.latitude +" Longitude: " + position.coords.longitude);
+function showDireccion(position) {
+	try
+    {
+		ar xhr = new XMLHttpRequest();
+		xhr.open('POST', 'http://localhost:8070/FarmaciaYa/PositionServlet?latitud=' + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
+		   
+	   // xhr.open('POST', 'http://ec2-52-23-240-0.compute-1.amazonaws.com/FarmaciaYa/PositionServlet?latitud=' + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
+	    xhr.send(null);
+    }
+    catch(exception)
+   {
+    alert("Request failed");
+   }
 }
 </script>
 <body onload="getLocation()">
