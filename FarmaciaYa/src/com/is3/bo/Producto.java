@@ -28,6 +28,39 @@ public class Producto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaProducto")
 	private long id;
 
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public String getDescBusqueda() {
+		return descBusqueda;
+	}
+	public void setDescBusqueda(String descBusqueda) {
+		this.descBusqueda = descBusqueda;
+	}
+	public BigDecimal getPrecioUnitario() {
+		return precioUnitario;
+	}
+	public void setPrecioUnitario(BigDecimal precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Column(nullable=false)
 	private String nombre;
 	@Column(nullable=false)

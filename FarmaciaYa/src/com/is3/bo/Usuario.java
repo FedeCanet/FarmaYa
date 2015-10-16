@@ -57,6 +57,9 @@ public class Usuario implements Serializable {
 	@Column(nullable=false)
 	private String password ;
 	
+	
+	private boolean confirmado;
+	
 
 	public long getId() {
 		return id;
@@ -120,6 +123,17 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "idCliente= " + id + " " + nombre + " " + apellido;
+	}
+
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public void setConfirmado(boolean confirmado) {
+		this.confirmado = confirmado;
+	}
+	public String getNombreCompleto(){
+		return this.getNombre()+" "+this.getApellido();
 	}
 	
 }
