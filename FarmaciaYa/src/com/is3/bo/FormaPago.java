@@ -28,9 +28,9 @@ public class FormaPago implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaFormaPago")
 	private long id;
 	@Column(nullable=false)
-	private String nombre; //Ejemplo: Ticket Alimentación, es la que se va a mostrar
+	private String nombre; //Ejemplo: Ticket Alimentacion, es la que se va a mostrar
 	@Column(nullable=false)
-	private String descripcion; //Ejemplo: Forma de Pago Ticket de Alimentación 
+	private String descripcion; //Ejemplo: Forma de Pago Ticket de Alimentacion 
 
 	public long getId() {
 		return id;
