@@ -73,7 +73,7 @@ public class EnvioCorreo {
 		
 		String urlLink = Parameters.getParameter("urlRecoverPassword")+"?userid="+correo;
 		
-		String emailBody = Parameters.getParameter("recuperarPasswordBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		String emailBody = Parameters.getParameter("recuperarPasswordBody").replace("#link#","<a href='"+urlLink+"'>aqui</a>");
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
@@ -88,7 +88,7 @@ public class EnvioCorreo {
 		
 		String urlLink = Parameters.getParameter("urlConfirmarUsuario")+"?userid="+correo;
 		
-		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aqui</a>");
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
