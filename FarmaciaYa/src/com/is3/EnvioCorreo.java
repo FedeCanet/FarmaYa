@@ -18,7 +18,6 @@ import javax.persistence.Query;
 
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
-import com.is3.dto.Posicion;
 
 public class EnvioCorreo {
  
