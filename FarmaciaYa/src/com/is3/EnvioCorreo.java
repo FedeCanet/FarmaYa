@@ -1,5 +1,7 @@
 package com.is3;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,11 +11,13 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
-
-import dto.Posicion;
 
 public class EnvioCorreo {
  
@@ -43,7 +47,9 @@ public class EnvioCorreo {
 		
 		mailMessage.setSubject(Parameters.getParameter("pedidoRegistradoSubject"));
 		
-		String emailBody = "";//Parameters.getParameter("pedidoRegistradoBody").replace("#farmacia#",orden.obtenerFarmaciaNombre());
+		String emailBody = Parameters.getParameter("pedidoRegistradoBody").replace("#cliente#",orden.getUsuario().getNombreCompleto());
+		
+		emailBody = emailBody.replace("#farmacia#",orden.getFarmacia().getNombre());
 		
 		BigDecimal total = BigDecimal.ZERO;
 		String listaPedido = "<table>";
@@ -71,7 +77,7 @@ public class EnvioCorreo {
 		
 		String urlLink = Parameters.getParameter("urlRecoverPassword")+"?userid="+correo;
 		
-		String emailBody = Parameters.getParameter("recuperarPasswordBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		String emailBody = Parameters.getParameter("recuperarPasswordBody").replace("#link#","<a href='"+urlLink+"'>aqui</a>");
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
@@ -86,13 +92,13 @@ public class EnvioCorreo {
 		
 		String urlLink = Parameters.getParameter("urlConfirmarUsuario")+"?userid="+correo;
 		
-		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aqui</a>");
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
 	}
 	
-	public static void enviarCorreo(MimeMessage mailMessage) throws AddressException, MessagingException {
+	private static void enviarCorreo(MimeMessage mailMessage) throws AddressException, MessagingException {
 		
 		String userGmail = Parameters.getParameter("correo");
 		String password = Parameters.getParameter("password");
@@ -121,6 +127,27 @@ public class EnvioCorreo {
 	
 	public static boolean verificarCorreo(String correo)
 	{
-		return true;
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Query queryCinco = em.createQuery("SELECT u.correo " +
+				"FROM Usuario u " +
+				"where u.correo = :correo");
+
+		queryCinco.setParameter("correo", correo);
+		
+		ArrayList usuarios = (ArrayList)queryCinco.getResultList();
+		
+		em.getTransaction().commit();
+		em.close();
+		emf.close();
+		
+		if(usuarios.size() > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
