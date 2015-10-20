@@ -22,7 +22,7 @@
     <servlet-name>Hello2</servlet-name>
     <url-pattern>/RecoverPasswordServlet</url-pattern>
   </servlet-mapping>
-  
+
     <servlet>
     <servlet-name>Hello3</servlet-name>
     <servlet-class>com.is3.ConfirmarMail</servlet-class>
@@ -66,5 +66,14 @@
   <servlet-mapping>
     <servlet-name>Hello7</servlet-name>
     <url-pattern>/RealizarPedidoServlet</url-pattern>
+
+  <servlet>
+    <servlet-name>Hello3</servlet-name>
+    <servlet-class>com.is3.PositionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello3</servlet-name>
+    <url-pattern>/PositionServlet</url-pattern>
+
   </servlet-mapping>
 </web-app>

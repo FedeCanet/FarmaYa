@@ -15,9 +15,6 @@
 		]]>
 	</confirmarUsuarioBody>
 	<urlRecoverPassword>http://localhost:8080/FarmaciaYa/cambiocontrasena.jsp</urlRecoverPassword>
-	<!-- 
-		<urlConfirmarUsuario>http://localhost:8080/FarmaciaYa/cambiocontrasena.jsp</urlConfirmarUsuario>
-	-->
 	<urlConfirmarUsuario>http://localhost:8080/FarmaciaYa/ConfirmarMail</urlConfirmarUsuario>
 	<resultadodebusqueda>
 	<![CDATA[
@@ -366,4 +363,12 @@
 			</aside>
 	]]>
 	</farmaciaCarritoVacio>
+	
+	<urlConfirmarUsuario>http://localhost:8080/FarmaciaYa/cambiocontrasena.jsp</urlConfirmarUsuario>	
+	<pedidoRegistradoSubject>FarmaYa! - Pedido Registrado</pedidoRegistradoSubject>
+	<pedidoRegistradoBody>
+		<![CDATA[
+		Estimado #clienteNombre#,<br>su pedido en #farmacia# ha sido registrado.<br>#detalleOrden#<br><br>Muchas Gracias por preferirnos - FarmaYa!
+		]]>
+	</pedidoRegistradoBody>
 </parameters>

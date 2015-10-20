@@ -27,7 +27,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 //		@NamedQuery(name = "existeSala", query = "SELECT s FROM SalaDeJuego s WHERE (s.pos = :pos) AND s.id <> :id"),
  })
 @Entity
-@Table(name = "FARM_T_USUARIO")
+@Table(name = "FAR_T_USUARIO")
 public class Usuario implements Serializable {
 
 	/**
@@ -56,6 +56,9 @@ public class Usuario implements Serializable {
 	private String correo ;
 	@Column(nullable=false)
 	private String password ;
+	
+	
+	private boolean confirmado;
 	
 
 	public long getId() {
@@ -120,6 +123,17 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "idCliente= " + id + " " + nombre + " " + apellido;
+	}
+
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public void setConfirmado(boolean confirmado) {
+		this.confirmado = confirmado;
+	}
+	public String getNombreCompleto(){
+		return this.getNombre()+" "+this.getApellido();
 	}
 	
 }

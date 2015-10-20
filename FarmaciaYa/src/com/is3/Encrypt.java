@@ -2,19 +2,26 @@ package com.is3;
 
 import java.security.MessageDigest;
 
-public class Encrypt {
+/** Clase encriptadora. */
+public class Encrypt 
+{
  
-	public byte[] crypt (String cadena) throws Exception{
-		
-		byte[] encryptedPassword = null;
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-512");
-			encryptedPassword = md.digest(cadena.getBytes());
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return encryptedPassword;
+/** Recibe un string y retorna el string encriptado con SHA512.
+ * @param cadena que se quiera encriptar
+ * @return el string encriptado
+ */
+public byte[] crypt(String cadena) throws Exception {
+	byte[] encryptedPassword = null;
+	try 
+	{
+		MessageDigest md = MessageDigest.getInstance("SHA-512");
+		encryptedPassword = md.digest(cadena.getBytes()); 
+	} 
+	catch (Exception e) 
+	{
+		e.printStackTrace();
+		throw e;
 	}
-	
+	return encryptedPassword; 
+	}
 }

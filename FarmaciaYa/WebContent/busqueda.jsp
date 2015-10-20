@@ -10,7 +10,34 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+
+<script type="text/javascript">
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showDireccion);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showDireccion(position) {
+	try
+    {
+		var xhr = new XMLHttpRequest();
+		
+		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split( '/' )[0];
+		xhr.open('POST', newURL+"/PositionServlet?latitud=" + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
+		   
+	   // xhr.open('POST', 'http://ec2-52-23-240-0.compute-1.amazonaws.com/FarmaciaYa/PositionServlet?latitud=' + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
+	    xhr.send(null);
+    }
+    catch(exception)
+   {
+    alert("Request failed");
+   }
+}
+</script>
+<body onload="getLocation()">
 <%
 //allow access only if session exists
 String user = null;
@@ -27,42 +54,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-	<header>
-		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-isf3">
-						<span class="sr-only">Desplegar / Ocultar Menu</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a href="#" class="navbar-brand">FarmaciaYa.com</a>
-				</div>
-
-				<!-- MENU Prueba -->
-				<div class="collapse navbar-collapse" id="navegacion-isf3">
-					<ul class="nav navbar-nav">
-						<!-- <li class="active"><a href="inicio.jsp">Inicio</a></li> -->
-						<li><a href="#">Mis Calificaciones</a></li>
-					</ul>
-
-					<form action="LogoutServlet" method="post" class="navbar-form navbar-right" role="loggin">
-						<div class="row">						
-							<div class="form-group">
-							<span class="glyphicon glyphicon-user"></span>
-								<a><%=user %></a>
-							</div>						
-							<button type="submit" class="btn btn-primary">
-								<span class="glyphicon glyphicon-off"></span>
-								Cerrar Sessión
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</header>
+<%@include file="Includes/header.jsp" %>	
 	
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
@@ -74,16 +66,46 @@ for(Cookie cookie : cookies){
 					<h1 class="titulo-inicio">Buscá el producto online</h1>
 					<p>Más de 250 Farmacias disponibles las 24hs los 7 días a la semana. <span class="glyphicon glyphicon-thumbs-up"></span></p>
 				</div>
-					<form action="BuscarServlet" class="navbar-form" method="post">
+					<form id="formDireccion" name="formDireccion" action="BuscarServlet" class="navbar-form" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon">Ciudad:</span>
-								<input type="text" name="ciudad" class="form-control">
+								<span class="input-group-addon">Tu Ciudad:</span>
+								<select name="ciudad" class="form-control" noresults="No hay resultados con" id="ciudad">
+									<option value="590">Artigas</option>
+									<option value="665">Bella Unión</option>
+									<option value="610">Canelones</option>
+									<option value="11">Ciudad de la Costa</option>
+									<option value="592">Colonia del Sacramento</option>
+									<option value="717">Costa de Oro</option>
+									<option value="608">Florida</option>
+									<option value="375">Fray Bentos</option>
+									<option value="439">Las Piedras</option>
+									<option value="43">Maldonado</option>
+									<option value="632">Melo</option>
+									<option value="666">Mercedes</option>
+									<option value="1" selected="selected">Montevideo</option>
+									<option value="654">Pando</option>
+									<option value="718">Parque del Plata</option>
+									<option value="64">Paysandú</option>
+									<option value="129">Piriápolis</option>
+									<option value="10">Punta del Este</option>
+									<option value="425">Rivera</option>
+									<option value="101">Salto</option>
+									<option value="453">San Carlos</option>
+									<option value="136">San José</option>
+									<option value="594">Tacuarembó</option>
+									<option value="664">Treinta y Tres</option>
+								</select>
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">Producto:</span>
+								<span class="input-group-addon">Tu dirección:</span>
+								<input type="text" name="direccion" value="<% out.println(request.getAttribute("direccion")); %>" class="form-control">
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Tu Producto o Farmacia:</span>
 								<input type="text" name="producto" class="form-control">
 							</div>
+							</br></br>
 							<button type="submit" name="Submit" class="btn btn-success">
 							<span class="glyphicon glyphicon-search"></span> 
 							Buscar
@@ -96,24 +118,11 @@ for(Cookie cookie : cookies){
 		</div>
 	</section>
 	
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-6">
-					<p>Ingeniería de Software III</p>
-				</div>
-				<div class="col-xs-6">
-					<ul class="list-inline text-right">
-						<li><a href="#">Inicio</a></li>
-						<li><a href="#">Mis Calificaciones</a></li>
-						<li><a href="#">Contacto</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
+<%@include file="Includes/footer.jsp" %>	
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+
+	
 </body>
 </html>
