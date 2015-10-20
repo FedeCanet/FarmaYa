@@ -17,7 +17,11 @@
 						<li class="active"><a href="inicio.jsp">Inicio</a></li>
 						<li><a href="#">Mis Calificaciones</a></li>
 					</ul>
+<%
 
+if (session == null)
+{
+%>
 					<form action="LoginServlet" method="post" class="navbar-form navbar-right" role="loggin">
 						<div class="row">						
 							<div class="form-group">
@@ -41,6 +45,22 @@
 							</ul>
 						</div>
 					</form>
+
+
+<%
+} else {
+%>
+<span class="navbar-brand active" style="float:right; padding-left:20px">
+<a href="logout.jsp" >Salir</a>
+</span>
+<span class="navbar-brand" style="float:right">
+Bienvenido <% out.println(session.getAttribute("user")); %>
+</span>
+
+<%
+} 
+%>
+
 				</div>
 			</div>
 		</nav>
