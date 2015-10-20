@@ -45,6 +45,7 @@ if(request.getAttribute("direccion")==null) {
 
 <script type="text/javascript">
 getLocation();
+location.refresh();
 </script>
 <%
 }
