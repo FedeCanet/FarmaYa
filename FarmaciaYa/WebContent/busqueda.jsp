@@ -66,7 +66,7 @@ for(Cookie cookie : cookies){
 					<h1 class="titulo-inicio">Buscá el producto online</h1>
 					<p>Más de 250 Farmacias disponibles las 24hs los 7 días a la semana. <span class="glyphicon glyphicon-thumbs-up"></span></p>
 				</div>
-					<form action="" class="navbar-form" method="post">
+					<form id="formDireccion" name="formDireccion" action="" class="navbar-form" method="post">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Tu Ciudad:</span>
@@ -99,7 +99,7 @@ for(Cookie cookie : cookies){
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Tu dirección:</span>
-								<input type="text" name="direccion" class="form-control">
+								<input type="text" name="direccion" value="<% out.println(request.getAttribute("direccion")); %>" class="form-control">
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Tu Producto o Farmacia:</span>
@@ -122,5 +122,7 @@ for(Cookie cookie : cookies){
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+
+	
 </body>
 </html>
