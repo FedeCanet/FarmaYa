@@ -40,8 +40,7 @@ function showDireccion(position) {
 <body>
 
 <%
-if request.getAttribute("direccion") == null
-{
+if(request.getAttribute("direccion")==null) {
 %>
 
 <script type="text/javascript">
@@ -49,9 +48,7 @@ getLocation();
 </script>
 <%
 }
-%>
 
-<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("user") == null){
