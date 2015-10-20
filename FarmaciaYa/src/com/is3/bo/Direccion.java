@@ -2,6 +2,7 @@ package com.is3.bo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +32,10 @@ public class Direccion implements Serializable {
     
     private String ciudad;
     
+    @Column(columnDefinition="Decimal(10,15)")
     private BigDecimal latitud;
     
+    @Column(columnDefinition="Decimal(10,15)")
     private BigDecimal longitud;
     
 

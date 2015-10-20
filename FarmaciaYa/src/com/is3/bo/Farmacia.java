@@ -11,13 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -46,11 +46,14 @@ public class Farmacia implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
 	private Direccion direccion;
 	
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "PRODUCTO_FK", referencedColumnName = "ID")
-	private Producto producto;
+//	@ManyToOne(optional = true)
+//	@JoinColumn(name = "PRODUCTO_FK", referencedColumnName = "ID")
+//	private Producto producto;
 	private Long importeMinimo ;
+	
+	@Temporal(TemporalType.TIME)
 	private Date horarioDesde;
+	@Temporal(TemporalType.TIME)
 	private Date horarioHasta;
 	@Column(nullable=false)
 	private boolean tieneDelivery; //Esto lo pidio Gonzalo. 
@@ -135,13 +138,6 @@ public class Farmacia implements Serializable {
 		this.tieneDelivery = tieneDelivery;
 	}
 
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
 
 	public float getPuntaje() {
 		return puntaje;
