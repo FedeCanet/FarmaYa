@@ -19,7 +19,7 @@
 					</ul>
 <%
 
-if (session == null)
+if (session.getAttribute("user") == null)
 {
 %>
 					<form action="LoginServlet" method="post" class="navbar-form navbar-right" role="loggin">
