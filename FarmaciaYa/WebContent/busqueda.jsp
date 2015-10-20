@@ -25,7 +25,7 @@ function showDireccion(position) {
     {
 		var xhr = new XMLHttpRequest();
 		
-		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split( '/' )[0];
+		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split( '/' )[1];
 		xhr.open('POST', newURL+"/PositionServlet?latitud=" + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
 		   
 	   // xhr.open('POST', 'http://ec2-52-23-240-0.compute-1.amazonaws.com/FarmaciaYa/PositionServlet?latitud=' + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
@@ -37,7 +37,20 @@ function showDireccion(position) {
    }
 }
 </script>
-<body onload="getLocation()">
+<body>
+
+<%
+if request.getAttribute("direccion") == null
+{
+%>
+
+<script type="text/javascript">
+getLocation();
+</script>
+<%
+}
+%>
+
 <%
 //allow access only if session exists
 String user = null;
