@@ -9,5 +9,6 @@
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="start"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;C:\Users\Usuario\Documents\FarmaYa\.metadata\.plugins\org.eclipse.wst.server.core\tmp0&quot; -Dcatalina.home=&quot;C:\apache-tomcat-7.0.63&quot; -Dwtp.deploy=&quot;C:\Users\Usuario\Documents\FarmaYa\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps&quot; -Djava.endorsed.dirs=&quot;C:\apache-tomcat-7.0.63\endorsed&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:FarmaciaYa}"/>
 <stringAttribute key="server-id" value="Tomcat v7.0 Server at localhost"/>
 </launchConfiguration>

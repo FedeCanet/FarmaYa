@@ -14,7 +14,7 @@ public class EnvioCorreo {
 	static Session getMailSession;
 	
 	public static void main(String args[])throws AddressException, MessagingException {
-		String correo = "gdotta30@gmail.com";
+		String correo = "nicojfernandez@gmail.com";
 		
 		EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
 	}
@@ -43,7 +43,14 @@ public class EnvioCorreo {
 		
 		String urlLink = Parameters.getParameter("urlConfirmarUsuario")+"?userid="+correo;
 		
-		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		
+		String prueba = "<form method='post' name='contact_form' " + 
+							" action='http://localhost:8080/FarmaciaYa/ConfirmarMail'>" + 
+							" <input type='submit' class='submitLink' value='Submit'>Click Aquí</form>";	
+		
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#",prueba);
+		
+		//String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");

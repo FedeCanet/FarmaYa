@@ -73,9 +73,11 @@ psswd = Document.GetElementById("contrasena")
 				</div>
 
 				<div class="col-xs-6">
+				<span>
 				<% int javavar = 8;
-					String UserID = getParameters("userid");
+					String UserID = String.valueOf(request.getAttribute("userid"));
 				%>
+				</span>
 					<div class="text-center">
 						<br>
 					<form action="" method="post">

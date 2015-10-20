@@ -12,13 +12,13 @@ import org.jdom2.input.SAXBuilder;
 public class Parameters{
 	
 	public static String getParameter(String key){
-		String value = null; 
+		String value = null;
+		
 	    SAXBuilder builder = new SAXBuilder();
-	    //String dir = "\\properties\\parameters.xml";
-	    //File xmlFile = new File( dir );
 	    File xmlFile = new File( "src\\META-INF\\parameters.xml" );
 	    try
 	    {
+
 	        Document document = (Document) builder.build( xmlFile );
 	 
 	        Element rootNode = document.getRootElement();
@@ -36,6 +36,7 @@ public class Parameters{
 	    }catch ( JDOMException jdomex ) {
 	        System.out.println( jdomex.getMessage() );
 	    }
+	    
 	    return value;
 	}
 }
