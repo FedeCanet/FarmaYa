@@ -9,8 +9,8 @@ import java.net.URL;
 import com.is3.bo.Direccion;
 
 public class Posicion {
-	private BigDecimal latitud;
-	private BigDecimal longitud;
+	private float latitud;
+	private float longitud;
 	private String direccion;
 	private String ciudad;
 	
@@ -35,16 +35,16 @@ public class Posicion {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-	public BigDecimal getLatitud() {
+	public float getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(BigDecimal latitud) {
+	public void setLatitud(float latitud) {
 		this.latitud = latitud;
 	}
-	public BigDecimal getLongitud() {
+	public float getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(BigDecimal longitud) {
+	public void setLongitud(float longitud) {
 		this.longitud = longitud;
 	}
 	
@@ -89,15 +89,15 @@ public class Posicion {
 			
 			this.setDireccion(direccion);
 			this.setCiudad(ciudad);
-			this.setLatitud(new BigDecimal(lat));
-			this.setLongitud(new BigDecimal(lon));
+			this.setLatitud(new Float(lat));
+			this.setLongitud(new Float(lon));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void getDirCiuByLatLong(BigDecimal latitud, BigDecimal longitud) throws Exception {
+	public void getDirCiuByLatLong(float latitud, float longitud) throws Exception {
 		try{
 			String url = "http://nominatim.openstreetmap.org/reverse?format=xml&lat="+latitud+"&lon="+longitud+"&zoom=18&addressdetails=1";	
 					

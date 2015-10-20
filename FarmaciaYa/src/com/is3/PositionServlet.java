@@ -24,7 +24,7 @@ public class PositionServlet extends HttpServlet implements Servlet {
 			
 		try {
 			Posicion p = new Posicion();
-			p.getDirCiuByLatLong(new BigDecimal(latitud), new BigDecimal(longitud));
+			p.getDirCiuByLatLong(new Float(latitud), new Float(longitud));
 			request.setAttribute("direccion", p.getDireccion());
 			//request.setAttribute("ciudad", p.getCiudad());
 	
