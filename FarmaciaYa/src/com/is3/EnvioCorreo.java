@@ -27,11 +27,11 @@ public class EnvioCorreo {
 	
 	public static void main(String args[])throws AddressException, MessagingException {
 		try {
-		/*	Posicion p = new Posicion();
+			Posicion p = new Posicion();
 			p.getDirCiuByLatLong(new BigDecimal("-34.899124"), new BigDecimal("-56.1454787"));
 			System.out.println(p.getDireccion());
 			System.out.println(p.getCiudad());
-*/
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
