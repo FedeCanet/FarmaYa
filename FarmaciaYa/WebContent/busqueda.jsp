@@ -58,7 +58,7 @@ for(Cookie cookie : cookies){
 	
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
-			<div class="row">
+			<div>
 				<div class="col-xs-13">
 					<div class="text-center">
 						<br>

@@ -49,7 +49,7 @@ public class EnvioCorreo {
 		
 		mailMessage.setSubject(Parameters.getParameter("pedidoRegistradoSubject"));
 		
-		String emailBody = Parameters.getParameter("pedidoRegistradoBody").replace("#cliente#",orden.getUsuario().getNombreCompleto());
+		String emailBody = Parameters.getParameter("pedidoRegistradoBody").replace("#clienteNombre#",orden.getUsuario().getNombreCompleto());
 		
 		emailBody = emailBody.replace("#farmacia#",orden.getFarmacia().getNombre());
 		
