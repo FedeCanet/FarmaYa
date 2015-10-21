@@ -37,18 +37,8 @@ function showDireccion(position) {
    }
 }
 </script>
-<body>
-
+<body onload="getLocation()">
 <%
-if(request.getAttribute("direccion")==null) {
-%>
-
-<script type="text/javascript">
-getLocation();
-</script>
-<%
-}
-
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("user") == null){
@@ -68,7 +58,7 @@ for(Cookie cookie : cookies){
 	
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
-			<div >
+			<div class="row">
 				<div class="col-xs-13">
 					<div class="text-center">
 						<br>
