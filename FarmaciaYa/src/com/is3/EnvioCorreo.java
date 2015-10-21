@@ -26,6 +26,7 @@ public class EnvioCorreo {
 	static Session getMailSession;
 	
 	public static void main(String args[])throws AddressException, MessagingException {
+
 		try {
 			Posicion p = new Posicion();
 			p.getDirCiuByLatLong(new Float("-34.899124"), new Float("-56.1454787"));
@@ -48,7 +49,7 @@ public class EnvioCorreo {
 		
 		mailMessage.setSubject(Parameters.getParameter("pedidoRegistradoSubject"));
 		
-		String emailBody = Parameters.getParameter("pedidoRegistradoBody").replace("#cliente#",orden.getUsuario().getNombreCompleto());
+		String emailBody = Parameters.getParameter("pedidoRegistradoBody").replace("#clienteNombre#",orden.getUsuario().getNombreCompleto());
 		
 		emailBody = emailBody.replace("#farmacia#",orden.getFarmacia().getNombre());
 		
@@ -93,7 +94,15 @@ public class EnvioCorreo {
 		
 		String urlLink = Parameters.getParameter("urlConfirmarUsuario")+"?userid="+correo;
 		
-		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aqui</a>");
+		/*
+		String prueba = "<form method='post' name='contact_form' " + 
+							" action='http://localhost:8080/FarmaciaYa/ConfirmarMail'>" + 
+							" <input type='submit' class='submitLink' value='Submit'>Click Aquí</form>";	
+		
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#",prueba);
+		*/
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);
 		System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");

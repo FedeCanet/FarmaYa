@@ -27,7 +27,7 @@ function showDireccion(position) {
 		
 		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split( '/' )[1];
 		xhr.open('POST', newURL+"/PositionServlet?latitud=" + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
-		   
+		
 	   // xhr.open('POST', 'http://ec2-52-23-240-0.compute-1.amazonaws.com/FarmaciaYa/PositionServlet?latitud=' + position.coords.latitude + "&longitud=" + position.coords.longitude, true);
 	    xhr.send(null);
     }
@@ -58,7 +58,7 @@ for(Cookie cookie : cookies){
 	
 	<section class="jumbotron jumbotron-inicio">
 		<div class="container">
-			<div class="row">
+			<div>
 				<div class="col-xs-13">
 					<div class="text-center">
 						<br>
@@ -66,7 +66,7 @@ for(Cookie cookie : cookies){
 					<h1 class="titulo-inicio">Buscá el producto online</h1>
 					<p>Más de 250 Farmacias disponibles las 24hs los 7 días a la semana. <span class="glyphicon glyphicon-thumbs-up"></span></p>
 				</div>
-					<form id="formDireccion" name="formDireccion" action="" class="navbar-form" method="post">
+					<form id="formDireccion" name="formDireccion" action="BuscarServlet" class="navbar-form" method="post">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Tu Ciudad:</span>

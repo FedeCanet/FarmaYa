@@ -36,6 +36,7 @@ psswd = Document.GetElementById("contrasena")
 				<% int javavar = 8;
 					String UserID = request.getParameter("userid");
 				%>
+				</span>
 					<div class="text-center">
 						<br>
 					<form action="" method="post">
