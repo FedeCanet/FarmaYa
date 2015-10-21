@@ -29,7 +29,7 @@ public class EnvioCorreo {
 
 		try {
 			Posicion p = new Posicion();
-			p.getDirCiuByLatLong(new BigDecimal("-34.899124"), new BigDecimal("-56.1454787"));
+			p.getDirCiuByLatLong(new Float("-34.899124"), new Float("-56.1454787"));
 			System.out.println(p.getDireccion());
 			System.out.println(p.getCiudad());
 

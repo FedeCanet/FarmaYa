@@ -32,11 +32,9 @@ public class Direccion implements Serializable {
     
     private String ciudad;
     
-    @Column(columnDefinition="Decimal(10,15)")
-    private BigDecimal latitud;
+    private float latitud;
     
-    @Column(columnDefinition="Decimal(10,15)")
-    private BigDecimal longitud;
+    private float longitud;
     
 
 	public long getId() {
@@ -72,19 +70,20 @@ public class Direccion implements Serializable {
 		this.numeroAPTO = numeroAPTO;
 	}
 
-	public BigDecimal getLatitud() {
+	
+	public float getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(BigDecimal latitud) {
+	public void setLatitud(float latitud) {
 		this.latitud = latitud;
 	}
 
-	public BigDecimal getLongitud() {
+	public float getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(BigDecimal longitud) {
+	public void setLongitud(float longitud) {
 		this.longitud = longitud;
 	}
 
