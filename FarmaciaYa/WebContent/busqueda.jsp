@@ -102,7 +102,7 @@ for(Cookie cookie : cookies){
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Tu dirección:</span>
-								<input type="text" name="direccion" value="<% out.println(request.getAttribute("direccion")); %>" class="form-control">
+								<input type="text" name="direccion" value="<% if(request.getAttribute("direccion")!=null){out.println(request.getAttribute("direccion"));} %>" class="form-control">
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Tu Producto o Farmacia:</span>
