@@ -97,11 +97,11 @@ public class EnvioCorreo {
 		/*
 		String prueba = "<form method='post' name='contact_form' " + 
 							" action='http://localhost:8080/FarmaciaYa/ConfirmarMail'>" + 
-							" <input type='submit' class='submitLink' value='Submit'>Click Aquí</form>";	
+							" <input type='submit' class='submitLink' value='Submit'>Click Aqui</form>";	
 		
 		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#",prueba);
 		*/
-		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aquí</a>");
+		String emailBody = Parameters.getParameter("confirmarUsuarioBody").replace("#link#","<a href='"+urlLink+"'>aqui</a>");
 
 		mailMessage.setContent(emailBody, "text/html");
 		EnvioCorreo.enviarCorreo(mailMessage);

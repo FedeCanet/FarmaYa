@@ -5,7 +5,11 @@
 	<persistence-unit name="prueba">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
+<<<<<<< HEAD
 			<property name="hibernate.connection.url" value="jdbc:postgresql://52.23.240.0:5432/farmaya" />
+=======
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/farmaya" />
+>>>>>>> 1ba90c080cacdc5ff4f8c2221ae070d26e7ca0aa
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.connection.password" value="fede1234" />
