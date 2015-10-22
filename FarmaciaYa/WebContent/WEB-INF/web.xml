@@ -31,4 +31,49 @@
     <servlet-name>Hello3</servlet-name>
     <url-pattern>/PositionServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello4</servlet-name>
+    <servlet-class>com.is3.ConfirmarMail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello4</servlet-name>
+    <url-pattern>/ConfirmarMail</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello5</servlet-name>
+    <servlet-class>com.is3.BuscarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello5</servlet-name>
+    <url-pattern>/BuscarServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello6</servlet-name>
+    <servlet-class>com.is3.FarmaciaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello6</servlet-name>
+    <url-pattern>/FarmaciaServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello7</servlet-name>
+    <servlet-class>com.is3.AgregarAlCarritoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello7</servlet-name>
+    <url-pattern>/AgregarAlCarritoServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello8</servlet-name>
+    <servlet-class>com.is3.RealizarPedidoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello8</servlet-name>
+    <url-pattern>/RealizarPedidoServlet</url-pattern>
+ </servlet-mapping>
 </web-app>
