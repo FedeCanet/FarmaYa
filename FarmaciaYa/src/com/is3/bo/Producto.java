@@ -27,6 +27,16 @@ public class Producto implements Serializable {
 	@SequenceGenerator(name = "secuenciaProducto", sequenceName = "FAR_S_PRODUCTO_SEC", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaProducto")
 	private long id;
+	
+	@Column(nullable=false)
+	private String nombre;
+	@Column(nullable=false)
+	private String descripcion ;
+	@Column(nullable=false)
+	private String descBusqueda; //buscar por este campo, ejemplo "Pastilla Pildora etc"
+	@Column(nullable=false)
+	private BigDecimal precioUnitario;
+	
 
 	public long getId() {
 		return id;
@@ -61,13 +71,6 @@ public class Producto implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	@Column(nullable=false)
-	private String nombre;
-	@Column(nullable=false)
-	private String descripcion ;
-	@Column(nullable=false)
-	private String descBusqueda; //buscar por este campo, ejemplo "Pastilla Pildora etc"
-	@Column(nullable=false)
-	private BigDecimal precioUnitario;
+
 	
 }

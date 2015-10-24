@@ -3,14 +3,18 @@ package com.is3;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import com.is3.bo.Direccion;
+import com.is3.bo.Farmacia;
 import com.is3.bo.Usuario;
+import com.is3.dto.Posicion;
 
 public class PersistenceHelper {
 
@@ -79,5 +83,25 @@ public class PersistenceHelper {
 			return false;
 		}
 	}
-	
+	public List <Farmacia> obtenerFarmaciasCercanas(Posicion p){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		TypedQuery<Farmacia> queryCinco = em.createQuery("SELECT f FROM Farmacia f",Farmacia.class);
+		
+		List<Farmacia> farmacias2 = new ArrayList<Farmacia>();
+		List<Farmacia> farmacias = queryCinco.getResultList();
+		for (Farmacia farm : farmacias){
+			Posicion p2 = new Posicion(farm.getDireccion());
+			//System.out.println("lat: "+p2.getLatitud()+" long: "+p2.getLongitud());
+			if (p.estaCerca(p2,1000)){
+				farmacias2.add(farm);
+			}
+		}
+		em.close();
+		emf.close();
+		return farmacias2;
+	}
 }
