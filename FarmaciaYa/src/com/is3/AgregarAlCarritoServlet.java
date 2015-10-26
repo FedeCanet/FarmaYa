@@ -1,12 +1,18 @@
 package com.is3;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.is3.bo.Farmacia;
+import com.is3.bo.Orden;
+import com.is3.bo.Producto;
 
 public class AgregarAlCarritoServlet extends HttpServlet {
 	
@@ -21,47 +27,125 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				
+		
+		PersistenceHelper per = new PersistenceHelper();
+		HttpSession session = request.getSession();
+		
+		Orden orden = null;
+		
+		if(session.getAttribute("elCarrito") != null){
+			orden = (Orden)session.getAttribute("elCarrito");
+		}else{
+			orden = new Orden();
+			session.setAttribute("elCarrito", orden);
+		}
+		
 		//Presentacion
+		Long farmaciaId = Long.parseLong(request.getParameter("idFarmacia"));
+		Farmacia laFarmacia = per.obtenerFarmacia(farmaciaId);
+		orden.setFarmacia(laFarmacia);
+		
 		String farmaciaPresentacion = Parameters.getParameter("farmaciaPresentacion");
 		
-		//Productos de la Farmacia
-		String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
-		
-		//Productos A agregar
-		String producto = request.getParameter("idProducto");
-		String farmaciaCarritoStructura = Parameters.getParameter("farmaciaCarritoStructura");
-	
-		if(producto.equals("1")){
-			//Aspirina
-			String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
-			
-			farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#","Aspirina");
-			farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#","200");
-			
-			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", farmaciaCarritoProducto);
-			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", "200");
-			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", "200");
-			
-			request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);
-			
-		}else{
-			//Zolven
-			String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
-			
-			farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#","Zolven");
-			farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#","150");
-			
-			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", farmaciaCarritoProducto);
-			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", "150");
-			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", "150");
-			
-			request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);
+		if(laFarmacia != null){
+			farmaciaPresentacion = farmaciaPresentacion.replace("#NombreFarmacia#", laFarmacia.getNombre());
+			String direccion = laFarmacia.getDireccion().getCalle();
+			farmaciaPresentacion = farmaciaPresentacion.replace("#Direccion#", direccion);
+			farmaciaPresentacion = farmaciaPresentacion.replace("#Puntaje#", String.valueOf(laFarmacia.getPuntaje()));
+			farmaciaPresentacion = farmaciaPresentacion.replace("#ImporteMinimo#", String.valueOf(laFarmacia.getImporteMinimo()));
 		}
 		
 		request.setAttribute("farmaciaPresentacion", farmaciaPresentacion);
-		request.setAttribute("farmaciaProductos", farmaciaProductos);
 		
+		//Productos de la Farmacia
+		String productos = null;
+		
+		ArrayList<Producto> listaProductos = (ArrayList)per.obtenerProductos();
+		for (int i = 0; i < 5; i++) {
+			Producto p = listaProductos.get(i);
+			String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
+			farmaciaProductos = farmaciaProductos.replace("#idFarmacia#", String.valueOf(farmaciaId));
+			farmaciaProductos = farmaciaProductos.replace("#idProducto#", String.valueOf(p.getId()));
+			farmaciaProductos = farmaciaProductos.replace("#Nombre#", p.getNombre());
+			farmaciaProductos = farmaciaProductos.replace("#PrecioUnitario#", String.valueOf(p.getPrecioUnitario()));
+
+			
+			productos += productos + " " + farmaciaProductos;
+		}
+		
+		//String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
+		request.setAttribute("farmaciaProductos", productos);
+		
+		
+		//Productos A agregar
+		long idProducto = Long.parseLong(request.getParameter("idProducto"));
+		Producto producto = per.obtenerProducto(idProducto);
+		String farmaciaCarritoStructura = Parameters.getParameter("farmaciaCarritoStructura");
+	
+		if(orden.getProductos() != null && orden.getProductos().size() > 0){
+			ArrayList<Producto> losProductos = (ArrayList<Producto>)orden.getProductos();
+			
+			String productosEnElCarrito = "";
+			double total = 0.0;
+			for (Producto producto2 : losProductos) {
+				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
+				total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario()));
+				productosEnElCarrito += productosEnElCarrito + " " + farmaciaCarritoProducto;
+			}
+			
+			if(producto != null){
+				
+				if(orden.getProductos() == null){
+					orden.setProductos( new ArrayList<Producto>());
+				}
+				
+				orden.getProductos().add(producto);
+				
+				//Aspirina
+				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
+				
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto.getNombre());
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto.getPrecioUnitario()));
+				
+				String totalDeProductos = productosEnElCarrito + " " + farmaciaCarritoProducto;
+				total += Double.parseDouble(String.valueOf(producto.getPrecioUnitario()));
+				
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", totalDeProductos);
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(total));
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(total));
+				
+				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);		
+			}else{
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", productosEnElCarrito);
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(total));
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(total));
+				
+				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);	
+			}	
+			
+		}else{
+			if(producto != null){
+				
+				if(orden.getProductos() == null){
+					orden.setProductos( new ArrayList<Producto>());
+				}
+				
+				orden.getProductos().add(producto);
+				
+				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
+				
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto.getNombre());
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto.getPrecioUnitario()));
+				
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", farmaciaCarritoProducto);
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(producto.getPrecioUnitario()));
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(producto.getPrecioUnitario()));
+				
+				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);		
+			}		
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/farmacia.jsp");
         rd.forward(request, response);

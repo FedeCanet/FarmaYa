@@ -1,12 +1,17 @@
 package com.is3;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.is3.bo.Direccion;
+import com.is3.bo.Farmacia;
+import com.is3.bo.Producto;
 
 public class FarmaciaServlet extends HttpServlet {
 
@@ -21,14 +26,41 @@ public class FarmaciaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				
-		String farmacia = request.getParameter("idFarmacia");
+
+		PersistenceHelper per = new PersistenceHelper();
+		Long farmaciaId = Long.parseLong(request.getParameter("idFarmacia"));
+		Farmacia laFarmacia = per.obtenerFarmacia(farmaciaId);
 		
 		String farmaciaPresentacion = Parameters.getParameter("farmaciaPresentacion");
-		String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
-		String farmaciaCarrito = Parameters.getParameter("farmaciaCarritoVacio");
+		
+		if(laFarmacia != null){
+			farmaciaPresentacion = farmaciaPresentacion.replace("#NombreFarmacia#", laFarmacia.getNombre());
+			String direccion = laFarmacia.getDireccion().getCalle();
+			farmaciaPresentacion = farmaciaPresentacion.replace("#Direccion#", direccion);
+			farmaciaPresentacion = farmaciaPresentacion.replace("#Puntaje#", String.valueOf(laFarmacia.getPuntaje()));
+			farmaciaPresentacion = farmaciaPresentacion.replace("#ImporteMinimo#", String.valueOf(laFarmacia.getImporteMinimo()));
+		}
+		
 		request.setAttribute("farmaciaPresentacion", farmaciaPresentacion);
-		request.setAttribute("farmaciaProductos", farmaciaProductos);
+		
+		String productos = null;
+		
+		ArrayList<Producto> listaProductos = (ArrayList)per.obtenerProductos();
+		for (int i = 0; i < 5; i++) {
+			Producto p = listaProductos.get(i);
+			String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
+			farmaciaProductos = farmaciaProductos.replace("#idFarmacia#", String.valueOf(farmaciaId));
+			farmaciaProductos = farmaciaProductos.replace("#idProducto#", String.valueOf(p.getId()));
+			farmaciaProductos = farmaciaProductos.replace("#Nombre#", p.getNombre());
+			farmaciaProductos = farmaciaProductos.replace("#PrecioUnitario#", String.valueOf(p.getPrecioUnitario()));
+			
+			productos += productos + " " + farmaciaProductos;
+		}
+		
+		//String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
+		request.setAttribute("farmaciaProductos", productos);
+		
+		String farmaciaCarrito = Parameters.getParameter("farmaciaCarritoVacio");
 		request.setAttribute("farmaciaCarrito", farmaciaCarrito);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/farmacia.jsp");

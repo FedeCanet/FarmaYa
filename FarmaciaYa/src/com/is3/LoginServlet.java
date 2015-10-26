@@ -1,10 +1,6 @@
 package com.is3;
 
-import javax.servlet.Servlet;
-
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,10 +25,8 @@ public class LoginServlet extends HttpServlet {
 		
 		PersistenceHelper persistHelper = new PersistenceHelper();
 		
-		//if(userID.equals(user) && password.equals(pwd)){
 		if(persistHelper.existUsuario(user, pwd)){
 			HttpSession session = request.getSession();
-			//session.setAttribute("user", "Pankaj");
 			session.setAttribute("user", user);
 			//setting session to expiry in 30 mins
 			session.setMaxInactiveInterval(30*60);
@@ -40,26 +34,21 @@ public class LoginServlet extends HttpServlet {
 			userName.setMaxAge(30*60);
 			response.addCookie(userName);
 			response.sendRedirect("busqueda.jsp");
-			//response.sendRedirect("LoginSuccess.jsp");
+			
 			//Agregar una ORDEN VACIA
 			if(session.getAttribute("orden") != null){
 				//Ya tiene una orden
-				
 			}else{
 				//creamos una nueva Orden
 				Orden o = new Orden();
-				
+				o.setUsuario(persistHelper.getUsuario(user, pwd));
+				o.setAclaracion("Esta es la ordeeen");
+				session.setAttribute("elCarrito", o);
 			}
-			
 		}else{
-			//RequestDispatcher rd = getServletContext().getRequestDispatcher("/inicio.jsp");//("/login.html");
 			request.setAttribute("errorMessage", "Usuario y/o Password incorrectos.");
 			RequestDispatcher rd = request.getRequestDispatcher("/inicio.jsp");
             rd.forward(request, response);
-			
-			//PrintWriter out= response.getWriter();
-			//out.println("<font color=red>Either user name or password is wrong.</font>");
-			//rd.include(request, response);
 		}
 	}
 }

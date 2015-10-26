@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
-<title>Insert title here</title>
+<title>Resultado de Busqueda</title>
 </head>
 <body>
 	<header>
@@ -47,6 +47,7 @@
 	</header>
 
 	<div class="container">
+		<%=request.getAttribute("resultadodebusquedaPresentacion")%>
 		<%=request.getAttribute("resultadodebusqueda")%>
 	</div>
 
@@ -66,6 +67,8 @@
 			</div>
 		</div>
 	</footer>
+	
+	
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
