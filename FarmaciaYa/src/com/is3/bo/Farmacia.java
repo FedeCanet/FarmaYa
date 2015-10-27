@@ -58,7 +58,7 @@ public class Farmacia implements Serializable {
 	@Column(nullable=false)
 	private boolean tieneDelivery; //Esto lo pidio Gonzalo. 
 	private float puntaje;//este se calcula  como la suma de todas las ordenes puntuadas dividido la cantidad de ordenes puntuadas
-	
+	private int cantPuntuajes;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "FORMA_DE_PAGO_FK", referencedColumnName = "ID")
@@ -145,6 +145,22 @@ public class Farmacia implements Serializable {
 
 	public void setPuntaje(float puntaje) {
 		this.puntaje = puntaje;
+	}
+
+	public int getCantPuntuajes() {
+		return cantPuntuajes;
+	}
+
+	public void setCantPuntuajes(int cantPuntuajes) {
+		this.cantPuntuajes = cantPuntuajes;
+	}
+
+	public List<FormaPago> getFormasDePago() {
+		return formasDePago;
+	}
+
+	public void setFormasDePago(List<FormaPago> formasDePago) {
+		this.formasDePago = formasDePago;
 	}
 
 	
