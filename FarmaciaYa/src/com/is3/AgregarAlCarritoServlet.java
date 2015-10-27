@@ -70,7 +70,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 			farmaciaProductos = farmaciaProductos.replace("#PrecioUnitario#", String.valueOf(p.getPrecioUnitario()));
 
 			
-			productos += productos + " " + farmaciaProductos;
+			productos = productos + " " + farmaciaProductos;
 		}
 		
 		//String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
@@ -92,7 +92,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
 				total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario()));
-				productosEnElCarrito += productosEnElCarrito + " " + farmaciaCarritoProducto;
+				productosEnElCarrito = productosEnElCarrito + " " + farmaciaCarritoProducto;
 			}
 			
 			if(producto != null){

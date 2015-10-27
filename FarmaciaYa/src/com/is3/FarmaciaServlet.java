@@ -54,7 +54,7 @@ public class FarmaciaServlet extends HttpServlet {
 			farmaciaProductos = farmaciaProductos.replace("#Nombre#", p.getNombre());
 			farmaciaProductos = farmaciaProductos.replace("#PrecioUnitario#", String.valueOf(p.getPrecioUnitario()));
 			
-			productos += productos + " " + farmaciaProductos;
+			productos = productos + " " + farmaciaProductos;
 		}
 		
 		//String farmaciaProductos = Parameters.getParameter("farmaciaProductos");
