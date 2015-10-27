@@ -20,3 +20,141 @@
 
 .footer {
 }
+
+.body{
+	background-color: #0C0C0C;
+}
+
+aside,figcaption,figure,footer,header,menu,nav,section {
+	display: block;
+}
+
+
+ul,figure {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+aside#cartContainer {
+	width: 100%;
+}
+
+aside#cartContainer #cart header h4 {
+	float: left;
+	font-size: 1.167rem;
+	font-weight: 700;
+	padding: .5em 0.1em .65em;
+	margin: 0;
+}
+
+aside#cartContainer #scrollContainer #scrollContent {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+aside#cartContainer #cart ul li {
+	overflow: hidden;
+	padding: .4em 1em;
+	border: 1px solid #fff;
+	cursor:pointer;
+}
+
+aside#cartContainer #cart ul li:last-child{
+	padding: .4em 1em .8em;
+}
+
+aside#cartContainer #cart ul li div {
+	float: left;
+}
+
+aside#cartContainer #cart ul li .dropdown {
+	float: left;height: 2.3125rem;
+	line-height: 2em;
+	width: 15%!important;
+	background: #fff;
+	position: relative;
+	top: -.1em;
+	margin-right: 2%;
+	padding: 0;
+	overflow: hidden;
+}
+
+aside#cartContainer #cart ul li .dropdown:after {
+	position: absolute;top: .05em;right: -3px;
+	border-radius: 3px;width: 25px;height: 25px;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+aside#cartContainer #cart ul li .dropdown select {
+	width: 150%;
+	height: 2.1125rem;
+	color: #4C4E4E;
+	background: #fff;
+	border: 0;
+	border-radius: 3px;
+	padding: 0;
+	padding: 0 0 0 .3em;
+}
+
+aside#cartContainer #cart ul li .name {
+	width: 58%;
+	padding: .5em .3em;
+	color:#0684B4;
+	line-height: 1.3;
+}
+
+aside#cartContainer #cart .price {
+	width: 30%;
+	text-align: right;
+	padding: .3em 0 0;
+	float: left;position: absolute;
+	right: 1em;
+}
+
+aside#cartContainer #cart .remove {
+	display: none;
+	width: 25%;
+	text-align: right;
+	padding: .3em 0 0;
+	float: left;
+}
+
+aside#cartContainer #cart .remove button:hover{
+	background-position: -6px -1331px;
+}
+aside#cartContainer #cart section {
+	padding: .3em 1em;
+	overflow: hidden;
+	position: relative;
+}
+
+aside#cartContainer #cart section.prefooterinfo div:first-child {
+	width: 75%;
+	float: left;
+}
+
+.roiwindo {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 80em;
+}
+
+.peeyaCardd {
+    background-color: #f5f5f5;
+    border: 1px solid #fff;
+    box-shadow: 0 2px 0 -1px rgba(230, 230, 230, 0.6);
+    -webkit-box-shadow: 0 2px 0 -1px rgba(230, 230, 230, 0.6);
+    -moz-box-shadow: 0 2px 0 -1px rgba(230, 230, 230, 0.6);
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 1em;
+}
