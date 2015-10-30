@@ -12,11 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.is3.bo.Orden;
+
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	HttpSession sesssion = request.getSession();
+    	Orden o = (Orden)sesssion.getAttribute("elCarrito");
+    	String orden = o.getAclaracion();
+    	
     	response.setContentType("text/html");
     	Cookie[] cookies = request.getCookies();
     	if(cookies != null){

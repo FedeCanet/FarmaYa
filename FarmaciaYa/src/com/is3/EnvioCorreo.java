@@ -2,6 +2,7 @@ package com.is3;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.is3.bo.Farmacia;
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
 import com.is3.dto.Posicion;
@@ -29,9 +31,35 @@ public class EnvioCorreo {
 
 		try {
 			Posicion p = new Posicion();
-			p.getDirCiuByLatLong(new Float("-34.899124"), new Float("-56.1454787"));
-			System.out.println(p.getDireccion());
-			System.out.println(p.getCiudad());
+			p.setLatitud(new Float("-34.755950"));
+			p.setLongitud(new Float("-55.726902"));
+			
+			Posicion p2 = new Posicion();
+			p2.setLatitud(new Float("-34.766620"));
+			p2.setLongitud(new Float("-55.764409"));
+			 
+			Posicion p3 = new Posicion();
+			p3.setLatitud(new Float("-34.765573"));
+			p3.setLongitud(new Float("-55.755245"));
+			
+			if (p.estaCerca(p2, 1000)){
+				System.out.println("si esta al toque");
+
+			}else{
+				System.out.println("ni a palo");
+
+			}
+			
+			PersistenceHelper per = new PersistenceHelper();
+			System.out.println("tiro select");
+			List <Farmacia> farmacias = per.obtenerFarmaciasCercanas(p);
+			if (farmacias.size()>0){
+				for (Farmacia farm : farmacias){
+					System.out.println(farm.getNombre());
+				}
+			}else{
+				System.out.println("sin registros");
+			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -55,10 +83,10 @@ public class EnvioCorreo {
 		
 		BigDecimal total = BigDecimal.ZERO;
 		String listaPedido = "<table>";
-		for (Producto p: orden.getProductos()){
-			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td></tr>";
-			total = total.add(p.getPrecioUnitario());
-		}
+//		for (Producto p: orden.getProductos()){
+//			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td></tr>";
+//			total = total.add(p.getPrecioUnitario());
+//		}
 		listaPedido += "<tr><td style=\"height: 20px;\"></td><td></td></tr>";
 		listaPedido += "<tr><td>Total</td><td>"+total.toString()+"</td></tr></table>";
 		

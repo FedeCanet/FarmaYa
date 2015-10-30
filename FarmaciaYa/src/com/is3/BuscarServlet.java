@@ -1,12 +1,19 @@
 package com.is3;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import com.is3.bo.Farmacia;
+import com.is3.dto.Posicion;
 
 public class BuscarServlet extends HttpServlet {
 
@@ -20,29 +27,90 @@ public class BuscarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+				
+		String direccion = null;
+		if(request.getParameter("direccion") != null){
+			direccion = String.valueOf(request.getParameter("direccion"));
+		}
 		
-		/**
-		 * RECUPERAR LAS FARMACIAS MAS CERCANAS 
-		 * La eleccion del departamento no importa para este 1er caso.
-		 * 
-		 * 1) Recuperar la direccion ingresada que viene en el request.
-		 * 2) Recuperar el producto que esta buscando que viene en el request.
-		 * 3) Llamar al metodo de Fede Cannet que a partir de la direccion devuelve un objeto direccion con latitud y longitud
-		 * 4) Llamar al metodo de Fede cannet que a partir de una latitud, longitud y producto (producto es opcional), devuelva 
-		 * 		una lista de farmacias mas cercanas que tengan ese producto, en caso de no venir el prducto por parametro buscar 
-		 * 		las farmacias mas cercanas a la longitud y latitud.
-		 * 
-		 * 5) mostrar esos resultados armando dinamicamente el html 
-		 */
+		String str_selected_value = String.valueOf(request.getParameter("ciudad"));
+		String ciudad = getCiudadFromIdSelected(str_selected_value);
 		
+		Posicion posicionUsuario = null;
 		
+		if(direccion != null){
+			posicionUsuario = new Posicion();
+			try {
+				posicionUsuario.getLatLongByDirCiu(direccion, ciudad);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			//recuperar todas no se
+			throw new NotImplementedException();
+		}
 		
-		String htmlBusqueda = Parameters.getParameter("resultadodebusqueda");
+		PersistenceHelper per = new PersistenceHelper();
+		
+		List <Farmacia> farmacias = per.obtenerFarmaciasCercanas(posicionUsuario);
+		
+		String htmlBusqueda ="";
+		
+		if (farmacias.size()>0){
+			for (Farmacia farm : farmacias){
+				String nombre = farm.getNombre();
+				String idFarmacia = String.valueOf(farm.getId());
+				String horario = String.valueOf(farm.getHorarioDesde());
+				String pedidoMin = String.valueOf(farm.getImporteMinimo());
+				String puntaje = String.valueOf(farm.getPuntaje());
+				String calle = farm.getDireccion().getCalle();
+				
+				String row = Parameters.getParameter("resultadodebusqueda");
+				row = row.replace("#idFarmacia#", idFarmacia);
+				row = row.replace("#nombreFarmacia#",nombre);
+				row = row.replace("#horario#",horario);
+				row = row.replace("#direccion#",calle);
+				row = row.replace("#importeMinimo#",pedidoMin);
+				htmlBusqueda = htmlBusqueda + " " + row;
+			}
+		}else{
+			System.out.println("sin registros");
+		}
+		
+		String htmlBusquedaPresentacion = Parameters.getParameter("resultadodebusquedapresentacion");
 		request.setAttribute("resultadodebusqueda", htmlBusqueda);
+		request.setAttribute("resultadodebusquedaPresentacion",htmlBusquedaPresentacion);
 		RequestDispatcher rd = request.getRequestDispatcher("/resultadodebusqueda.jsp");
         rd.forward(request, response);
 	}
 	
-	
-
+	public String getCiudadFromIdSelected(String id){
+		HashMap<String, String> mapCiudad = new HashMap<String, String>();
+		mapCiudad.put("590", "Artigas");
+		mapCiudad.put("665", "Bella Union");
+		mapCiudad.put("610", "Canelones");
+		mapCiudad.put("11", "Ciudad de la Costa");
+		mapCiudad.put("592", "Colonia del Sacramento");
+		mapCiudad.put("717", "Costa de Oro");
+		mapCiudad.put("608", "Florida");
+		mapCiudad.put("375", "Fray Bentos");
+		mapCiudad.put("439", "Las Piedras");
+		mapCiudad.put("43", "Maldonado");
+		mapCiudad.put("632", "Melo");
+		mapCiudad.put("666", "Mercedes");
+		mapCiudad.put("1", "Montevideo");
+		mapCiudad.put("654", "Pando");
+		mapCiudad.put("718", "Parque del Plata");
+		mapCiudad.put("64", "Paysandu");
+		mapCiudad.put("129", "Piriapolis");
+		mapCiudad.put("10", "Punta del Este");
+		mapCiudad.put("425", "Rivera");
+		mapCiudad.put("101", "Salto");
+		mapCiudad.put("453", "San Carlos");
+		mapCiudad.put("136", "San Jose");
+		mapCiudad.put("594", "Tacuarembo");
+		mapCiudad.put("664", "Treinta y Tres");
+		return mapCiudad.get(id);
+	}
 }

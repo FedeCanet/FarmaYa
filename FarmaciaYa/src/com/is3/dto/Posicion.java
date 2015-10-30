@@ -153,5 +153,24 @@ public class Posicion {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean estaCerca(Posicion p2, double distancia) {
+		//distancia viene en metros, si le pasas 1000 son mil metros de distancia.
+        double R = 6371000; // m
+        double dLat = Math.toRadians(p2.latitud - this.latitud);
+        double dLon = Math.toRadians(p2.longitud - this.longitud);
+        double lat1 = Math.toRadians(this.latitud);
+        double lat2 = Math.toRadians(p2.latitud);
 
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2)
+                * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double d = R * c;
+        
+        if (d <= distancia){
+        	return true;
+        }else{
+        	return false;
+        }
+    }
 }

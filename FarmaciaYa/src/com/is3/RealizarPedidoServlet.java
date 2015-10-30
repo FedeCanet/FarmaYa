@@ -26,42 +26,31 @@ public class RealizarPedidoServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//super.doPost(req, resp);
+
+		HttpSession session = request.getSession();
 		
-		Orden orden = new Orden();
-		String correo = "";
-		String nombre = "";
-		String nombreFarmacia= "";
-				
-		HttpSession session = req.getSession();
-		correo = String.valueOf(session.getAttribute("user"));
+		Orden orden = null;
 		
-		Usuario u = new Usuario();
-		u.setCorreo(correo);
-		u.setNombre(nombre);
-		u.setApellido(nombre);
-		
-		Farmacia f = new Farmacia();
-		f.setNombre(nombreFarmacia);
-		
-		List<Producto> lista = new ArrayList<Producto>();
-		
-		orden.setUsuario(u);
-		orden.setFarmacia(f);
-		orden.setProductos(lista);
+		if(session.getAttribute("elCarrito") != null){
+			orden = (Orden)session.getAttribute("elCarrito");
+		}else{
+			
+		}
 		
 		EnvioCorreo env = new EnvioCorreo();
 		try {
-			//env.enviarCorreoConfirmarUsuario("nicojfernandez@gmail.com");
 			env.enviarCorreoPedidoRegistrado(orden);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/inicio.jsp");
-        rd.forward(req, resp);
+		//reiniciamos la orden
+//		orden.setProductos(null);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/inicio.jsp");
+        rd.forward(request, resp);
 	}
 }
