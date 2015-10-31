@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 
 import com.is3.bo.Direccion;
 import com.is3.bo.Farmacia;
+import com.is3.bo.Orden;
 import com.is3.bo.Producto;
 import com.is3.bo.Usuario;
 import com.is3.dto.Posicion;
@@ -181,5 +182,9 @@ public class PersistenceHelper {
 		emf.close();
 		
 		return producto;
-	}	
+	}
+	
+	private void puntuarFarmacia(Farmacia famacia, Orden orden){
+		// pablo se encarga de terminar esto     cant 12 promedio 4.1 entonces  (4.1 * 12 + nuevo puntaje) /  (12 +1)  
+	}
 }

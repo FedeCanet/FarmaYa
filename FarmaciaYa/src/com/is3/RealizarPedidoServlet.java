@@ -48,7 +48,7 @@ public class RealizarPedidoServlet extends HttpServlet {
 		}
 		
 		//reiniciamos la orden
-		orden.setProductos(null);
+//		orden.setProductos(null);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/inicio.jsp");
         rd.forward(request, resp);

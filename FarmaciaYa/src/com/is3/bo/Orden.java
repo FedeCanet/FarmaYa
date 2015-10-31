@@ -41,11 +41,12 @@ public class Orden implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaOrden")
 	private long id;
 
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "ORDEN_FK", referencedColumnName = "ID")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Producto> productos;
+//
+//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JoinColumn(name = "PRODUCTOORDEN_FK", referencedColumnName = "ID")
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	private List<ProductoOrden> productoOrden;
+	
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
 	private Usuario usuario;	
 	@Column(nullable=false)
@@ -62,6 +63,13 @@ public class Orden implements Serializable {
 	private String aclaracion;	
 	private float puntaje;
 	
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "ORDEN_FK", referencedColumnName = "ID")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<ProductoOrden> productoOrdenes;
+	
 	public long getId() {
 		return id;
 	}
@@ -70,12 +78,13 @@ public class Orden implements Serializable {
 		this.id = id;
 	}
 
-	public List<Producto> getProductos() {
-		return productos;
+	
+	public List<ProductoOrden> getProductoOrdenes() {
+		return productoOrdenes;
 	}
 
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setProductoOrdenes(List<ProductoOrden> productoOrdenes) {
+		this.productoOrdenes = productoOrdenes;
 	}
 
 	public Usuario getUsuario() {

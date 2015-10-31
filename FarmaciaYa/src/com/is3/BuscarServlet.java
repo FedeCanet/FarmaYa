@@ -88,7 +88,7 @@ public class BuscarServlet extends HttpServlet {
 	public String getCiudadFromIdSelected(String id){
 		HashMap<String, String> mapCiudad = new HashMap<String, String>();
 		mapCiudad.put("590", "Artigas");
-		mapCiudad.put("665", "Bella Unión");
+		mapCiudad.put("665", "Bella Union");
 		mapCiudad.put("610", "Canelones");
 		mapCiudad.put("11", "Ciudad de la Costa");
 		mapCiudad.put("592", "Colonia del Sacramento");
@@ -102,14 +102,14 @@ public class BuscarServlet extends HttpServlet {
 		mapCiudad.put("1", "Montevideo");
 		mapCiudad.put("654", "Pando");
 		mapCiudad.put("718", "Parque del Plata");
-		mapCiudad.put("64", "Paysandú");
-		mapCiudad.put("129", "Piriápolis");
+		mapCiudad.put("64", "Paysandu");
+		mapCiudad.put("129", "Piriapolis");
 		mapCiudad.put("10", "Punta del Este");
 		mapCiudad.put("425", "Rivera");
 		mapCiudad.put("101", "Salto");
 		mapCiudad.put("453", "San Carlos");
-		mapCiudad.put("136", "San José");
-		mapCiudad.put("594", "Tacuarembó");
+		mapCiudad.put("136", "San Jose");
+		mapCiudad.put("594", "Tacuarembo");
 		mapCiudad.put("664", "Treinta y Tres");
 		return mapCiudad.get(id);
 	}

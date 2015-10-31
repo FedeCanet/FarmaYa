@@ -10,44 +10,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
-<script type="text/javascript">
-function validacion() {
-	nombre = document.getElementById("nombre").value;
-	if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre) ) {
-		alert('[ERROR] El campo Nombre debe tener un valor de.');
-	  	return false;
-	}
 
-	apellido = document.getElementById("apellido").value;
-	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
-		alert('[ERROR] El campo Apellido debe tener un valor de.');
-		return false;
-	}
-	
-	apellido = document.getElementById("correo").value;
-	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
-		alert('[ERROR] El campo Correo debe tener un valor de.');
-		return false;
-	}
-
-	apellido = document.getElementById("direccion").value;
-	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
-		alert('[ERROR] El campo Dirección debe tener un valor de.');
-		return false;
-	}
-	
-	apellido = document.getElementById("password").value;
-	if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
-		alert('[ERROR] El campo Contraseña debe tener un valor de.');
-		return false;
-	}
-	return true;
-}
-
-function newPage(url){
-	window.location.href = url;
-}
-</script>
 
 <body>
 <%
@@ -75,39 +38,39 @@ if(session.getAttribute("user") != null){
 				<div class="col-xs-13">
 					<div class="text-center">
 						<br>
-					<form action="UsuarioServlet" method="post" onsubmit="return validacion()">
+					<form action="UsuarioServlet" method="post" data-toggle="validator">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Nombre:</span>
-								<input type="text" id="nombre" name="nombre" class="form-control">
+								<input type="text" id="nombre" name="nombre" class="form-control"  data-error="Ingresa tu Nombre" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Apellido:</span>
-								<input type="text" id="apellido" name="apellido" class="form-control">
+								<input type="text" id="apellido" name="apellido" class="form-control" data-error="Ingresa tu apellido" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Dirección:</span>
-								<input type="text" id="direccion" name="direccion" class="form-control">
+								<input type="text" id="direccion" name="direccion" class="form-control" data-error="Ingresa tu dirección" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Correo:</span>
-								<input type="text" id="correo" name="correo" class="form-control">
+								<input type="email" id="correo" name="correo" class="form-control" data-error="Ingresa un mail válido" required>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Contraseña:</span>
-								<input type="password" id="password" name="password" class="form-control">
+								<input type="password" id="password" name="password" data-minlength="6" maxlength="8" class="form-control"  data-error="Ingresa una contraseña" required>
 							</div>
 						</div>
 												
