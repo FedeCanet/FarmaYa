@@ -7,7 +7,7 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/estilos.css">
-<title>Insert title here</title>
+<title>Farmacia</title>
 </head>
 <body>
 	<header> <nav class="navbar navbar-inverse navbar-static-top"

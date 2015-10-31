@@ -76,4 +76,13 @@
     <servlet-name>Hello8</servlet-name>
     <url-pattern>/PositionServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello9</servlet-name>
+    <servlet-class>com.is3.EliminarDelCarritoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello9</servlet-name>
+    <url-pattern>/EliminarDelCarritoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

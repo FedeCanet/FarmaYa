@@ -91,6 +91,8 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto2.getId()));
 				total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario()));
 				productosEnElCarrito = productosEnElCarrito + " " + farmaciaCarritoProducto;
 			}
@@ -108,6 +110,8 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto.getPrecioUnitario()));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto.getId()));
 				
 				String totalDeProductos = productosEnElCarrito + " " + farmaciaCarritoProducto;
 				total += Double.parseDouble(String.valueOf(producto.getPrecioUnitario()));
@@ -138,6 +142,8 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto.getPrecioUnitario()));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto.getId()));
 				
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", farmaciaCarritoProducto);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(producto.getPrecioUnitario()));

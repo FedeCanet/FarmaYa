@@ -205,8 +205,14 @@
 		</div>
 		<div class="name">#NombreProducto#</div>
 		<div class="price">$#PrecioProducto#</div>
-		<div class="remove">
-			<button type="button" class="button none" title="Quitar">Quitar</button>
+		<!-- <div class="remove"> -->
+		<div>
+			<form action="EliminarDelCarritoServlet" method="post">
+				<input type="hidden" name="idFarmacia" value="#idFarmacia#"/>
+				<input type="hidden" name="idProducto" value="#idProducto#"/>
+				<!-- <button type="button" class="button none" title="Quitar">Quitar</button> -->
+				<button class="btn btn-xs btn-default" title="Quitar">Quitar</button>
+			</form>
 		</div>
 	</li>
 	]]>

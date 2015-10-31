@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.is3.bo.Direccion;
 import com.is3.bo.Orden;
+import com.is3.bo.Usuario;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -28,6 +30,10 @@ public class LoginServlet extends HttpServlet {
 		if(persistHelper.existUsuario(user, pwd)){
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
+			
+			Usuario u = persistHelper.getUsuario(user, pwd);
+			Direccion dir = u.getDirecciones().get(0);
+			session.setAttribute("puntuacionDireccion", dir.getCalle());
 			//setting session to expiry in 30 mins
 			session.setMaxInactiveInterval(30*60);
 			Cookie userName = new Cookie("user", user);
