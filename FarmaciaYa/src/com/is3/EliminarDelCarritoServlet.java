@@ -1,6 +1,7 @@
 package com.is3;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.is3.bo.Farmacia;
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
+import com.is3.bo.ProductoOrden;
 
 public class EliminarDelCarritoServlet extends HttpServlet {
 
@@ -52,12 +54,13 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 		
 		//Presentacion
 		Long productoIdAEliminar = Long.parseLong(request.getParameter("idProducto"));
+
 		
-		for (Producto produ : orden.getProductos()) {
-			if(produ.getId() == productoIdAEliminar){
-				orden.getProductos().remove(produ);
+		for (ProductoOrden prodOrden : orden.getProductoOrden()) {
+			if(prodOrden.getProducto().getId() == productoIdAEliminar){
+				orden.getProductoOrden().remove(prodOrden);
 				break;
-			}
+			}			
 		}
 		
 		String farmaciaPresentacion = Parameters.getParameter("farmaciaPresentacion");
@@ -94,12 +97,13 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 		//Agregamos los productos que estan en la orden, si está vacia entonces agregamos el carrito vacio.
 		String farmaciaCarritoStructura = Parameters.getParameter("farmaciaCarritoStructura");
 	
-		if(orden.getProductos() != null && orden.getProductos().size() > 0){
-			ArrayList<Producto> losProductos = (ArrayList<Producto>)orden.getProductos();
-			
+		if(orden.getProductoOrden() != null && orden.getProductoOrden().size() > 0){
+						
 			String productosEnElCarrito = "";
 			double total = 0.0;
-			for (Producto producto2 : losProductos) {
+			
+			for (ProductoOrden prodOrden : orden.getProductoOrden()) {
+				Producto producto2 = prodOrden.getProducto();
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
@@ -114,6 +118,8 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 			farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(total));
 			
 			request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);	
+			
+			orden.setTotal(new BigDecimal(total));
 		}else{
 			
 			String farmaciaCarrito = Parameters.getParameter("farmaciaCarritoVacio");

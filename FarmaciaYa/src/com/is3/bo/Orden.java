@@ -1,4 +1,5 @@
 package com.is3.bo;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -7,19 +8,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 
 @NamedQueries({
 //		@NamedQuery(name = "getSalas", query = "SELECT s FROM SalaDeJuego s"),
@@ -32,7 +29,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Orden implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -41,35 +38,27 @@ public class Orden implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaOrden")
 	private long id;
 
-//
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinColumn(name = "PRODUCTOORDEN_FK", referencedColumnName = "ID")
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	private List<ProductoOrden> productoOrden;
-	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
-	private Usuario usuario;	
+	@ManyToOne (fetch = FetchType.LAZY)
+	private Usuario usuario;
 	@Column(nullable=false)
 	private Date fechaOrden ;
 	@Column(nullable=false)
 	private BigDecimal total ;
-	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
+
+	@ManyToOne (fetch = FetchType.LAZY)
 	private FormaPago formaDePAgo;
-	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
+
+	//@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Farmacia farmacia;
-	
-	private String aclaracion;	
+
+	private String aclaracion;
 	private float puntaje;
-	
-	
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "ORDEN_FK", referencedColumnName = "ID")
-	@LazyCollection(LazyCollectionOption.FALSE)
+
+	//@OneToMany (mappedBy="orden")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "orden", cascade = CascadeType.ALL)
 	private List<ProductoOrden> productoOrdenes;
-	
+
 	public long getId() {
 		return id;
 	}
@@ -78,12 +67,10 @@ public class Orden implements Serializable {
 		this.id = id;
 	}
 
-	
-	public List<ProductoOrden> getProductoOrdenes() {
+	public List<ProductoOrden> getProductoOrden() {
 		return productoOrdenes;
 	}
-
-	public void setProductoOrdenes(List<ProductoOrden> productoOrdenes) {
+	public void setProductoOrden(List<ProductoOrden> productoOrdenes) {
 		this.productoOrdenes = productoOrdenes;
 	}
 
@@ -142,6 +129,4 @@ public class Orden implements Serializable {
 	public void setFarmacia(Farmacia farmacia) {
 		this.farmacia = farmacia;
 	}
-
-	
 }

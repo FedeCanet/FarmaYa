@@ -1,6 +1,7 @@
 package com.is3;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -8,9 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.is3.bo.Direccion;
 import com.is3.bo.Farmacia;
+import com.is3.bo.Orden;
 import com.is3.bo.Producto;
 
 public class FarmaciaServlet extends HttpServlet {
@@ -26,10 +29,19 @@ public class FarmaciaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		
 		PersistenceHelper per = new PersistenceHelper();
 		Long farmaciaId = Long.parseLong(request.getParameter("idFarmacia"));
 		Farmacia laFarmacia = per.obtenerFarmacia(farmaciaId);
+		
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("elCarrito") != null){
+			//Ya tiene una orden
+			Orden o = (Orden)session.getAttribute("elCarrito");
+			o.setFarmacia(laFarmacia);
+			o.setFormaDePAgo(laFarmacia.getFormasDePago().get(0));
+		}		
 		
 		String farmaciaPresentacion = Parameters.getParameter("farmaciaPresentacion");
 		

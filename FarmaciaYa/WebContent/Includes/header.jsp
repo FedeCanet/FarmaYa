@@ -15,7 +15,17 @@
 				<div class="collapse navbar-collapse" id="navegacion-isf3">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="inicio.jsp">Inicio</a></li>
-						<li><a href="puntuacion.jsp">Mis Calificaciones</a></li>                                    
+						<li>
+							<a href="#">
+							<form action="PuntuacionServlet" method="post" role="loggin">
+								<div class="row">
+									<button type="submit" Style="background-color: Transparent; border: none;">
+										</span> Mis Calificaciones
+									</button>
+								</div>
+							</form>
+							</a>
+						</li>                                    
 					</ul>
 <%
 
@@ -51,7 +61,15 @@ if (session.getAttribute("user") == null)
 } else {
 %>
 <span class="navbar-brand active" style="float:right; padding-left:20px">
-<a href="logout.jsp" >Salir</a>
+<a href="#">
+<form action="LogoutServlet" method="post" role="loggin">
+	<div class="row">
+		<button type="submit" Style="background-color: Transparent; border: none;">
+			</span> Salir
+		</button>
+	</div>
+</form>
+</a>
 </span>
 <span class="navbar-brand" style="float:right">
 Bienvenido <% out.println(session.getAttribute("user")); %>

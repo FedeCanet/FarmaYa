@@ -20,6 +20,7 @@ import javax.persistence.Query;
 import com.is3.bo.Farmacia;
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
+import com.is3.bo.ProductoOrden;
 import com.is3.dto.Posicion;
 
 public class EnvioCorreo {
@@ -83,10 +84,11 @@ public class EnvioCorreo {
 		
 		BigDecimal total = BigDecimal.ZERO;
 		String listaPedido = "<table>";
-//		for (Producto p: orden.getProductos()){
-//			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td></tr>";
-//			total = total.add(p.getPrecioUnitario());
-//		}
+		for (ProductoOrden produOrden : orden.getProductoOrden()) {
+			Producto p = produOrden.getProducto();
+			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td></tr>";
+			total = total.add(p.getPrecioUnitario());
+		}
 		listaPedido += "<tr><td style=\"height: 20px;\"></td><td></td></tr>";
 		listaPedido += "<tr><td>Total</td><td>"+total.toString()+"</td></tr></table>";
 		

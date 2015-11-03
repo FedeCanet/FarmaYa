@@ -159,3 +159,11 @@ aside#cartContainer #cart section.prefooterinfo div:first-child {
     border-radius: 4px;
     padding: 1em;
 }
+
+.buttonSalir{
+	background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}

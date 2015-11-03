@@ -40,6 +40,16 @@ public class RealizarPedidoServlet extends HttpServlet {
 			
 		}
 		
+		PersistenceHelper perHelper = new PersistenceHelper();
+		
+		try {
+			perHelper.confirmarOrden(orden);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		
 		EnvioCorreo env = new EnvioCorreo();
 		try {
 			env.enviarCorreoPedidoRegistrado(orden);

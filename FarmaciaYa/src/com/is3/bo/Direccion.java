@@ -1,15 +1,12 @@
 package com.is3.bo;
-import java.io.Serializable;
-import java.math.BigDecimal;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "FAR_T_DIRECCION")
@@ -22,20 +19,18 @@ public class Direccion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaDireccion")
 	private long id;
 
-//	@ManyToOne(optional = true)
-//	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")----
     private String calle;
-         
+
     private int numeroDePuerta;
-    
+
     private String numeroAPTO;
-    
+
     private String ciudad;
-    
+
     private float latitud;
-    
+
     private float longitud;
-    
+
 
 	public long getId() {
 		return id;
@@ -53,7 +48,6 @@ public class Direccion implements Serializable {
 		this.calle = calle;
 	}
 
-
 	public int getNumeroDePuerta() {
 		return numeroDePuerta;
 	}
@@ -70,7 +64,6 @@ public class Direccion implements Serializable {
 		this.numeroAPTO = numeroAPTO;
 	}
 
-	
 	public float getLatitud() {
 		return latitud;
 	}
@@ -94,5 +87,4 @@ public class Direccion implements Serializable {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-		
 }

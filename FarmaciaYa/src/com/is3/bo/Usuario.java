@@ -3,7 +3,6 @@ package com.is3.bo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +14,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 
 @NamedQueries({
 //		@NamedQuery(name = "getSalas", query = "SELECT s FROM SalaDeJuego s"),
@@ -31,7 +28,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Usuario implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +42,7 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "USUARIO_FK", referencedColumnName = "ID")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Direccion> direcciones;
-	
+
 	@Column(nullable=false)
 	private Date fechaCreacion;
 	@Column(nullable=false)
@@ -56,10 +53,14 @@ public class Usuario implements Serializable {
 	private String correo ;
 	@Column(nullable=false)
 	private String password ;
-	
-	
+
+
 	private boolean confirmado;
-	
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Orden> listaOrdenes;
 
 	public long getId() {
 		return id;
@@ -68,7 +69,6 @@ public class Usuario implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public List<Direccion> getDirecciones() {
 		return direcciones;
@@ -93,8 +93,6 @@ public class Usuario implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
 
 	public String getApellido() {
 		return apellido;
@@ -135,5 +133,11 @@ public class Usuario implements Serializable {
 	public String getNombreCompleto(){
 		return this.getNombre()+" "+this.getApellido();
 	}
-	
+
+	public List<Orden> getOrdenes() {
+		return listaOrdenes;
+	}
+	public void setOrdenes(List<Orden> ordenes) {
+		this.listaOrdenes = ordenes;
+	}
 }

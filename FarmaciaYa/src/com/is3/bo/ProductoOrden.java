@@ -1,25 +1,18 @@
 package com.is3.bo;
+
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 
 @NamedQueries({
 //		@NamedQuery(name = "getSalas", query = "SELECT s FROM SalaDeJuego s"),
@@ -32,7 +25,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class ProductoOrden implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -41,15 +34,13 @@ public class ProductoOrden implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaProductoOrden")
 	private long id;
 
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinColumn(name = "PRODUCTOORDEN_FK", referencedColumnName = "ID")
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	private List<Orden> ordenes;
-//	
-	
-	
-	
-	
+	//@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Producto producto;
+
+	@ManyToOne (fetch = FetchType.LAZY)
+	private Orden orden;
+
 	public long getId() {
 		return id;
 	}
@@ -58,5 +49,19 @@ public class ProductoOrden implements Serializable {
 		this.id = id;
 	}
 
+	public Producto getProducto() {
+		return producto;
+	}
 
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	public Orden getOrden() {
+		return orden;
+	}
+
+	public void setOrden(Orden orden) {
+		this.orden = orden;
+	}
 }

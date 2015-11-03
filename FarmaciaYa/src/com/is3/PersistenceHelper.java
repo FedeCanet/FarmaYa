@@ -1,5 +1,6 @@
 package com.is3;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +14,10 @@ import javax.persistence.TypedQuery;
 
 import com.is3.bo.Direccion;
 import com.is3.bo.Farmacia;
+import com.is3.bo.FormaPago;
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
+import com.is3.bo.ProductoOrden;
 import com.is3.bo.Usuario;
 import com.is3.dto.Posicion;
 
@@ -31,19 +34,27 @@ public class PersistenceHelper {
 		
 		em.getTransaction().begin();
 		
-		Usuario u = new Usuario();
-		u.setNombre(nom);
-		u.setApellido(app);
-		u.setFechaCreacion(new Date(System.currentTimeMillis()));
-		u.setPassword(pass);
-		u.setCorreo(correo);
+		//Nuevo Usuario
+		Usuario nuevoUsuario = new Usuario();
+		nuevoUsuario.setNombre(nom);
+		nuevoUsuario.setApellido(app);
+		nuevoUsuario.setFechaCreacion(new Date(System.currentTimeMillis()));
+		nuevoUsuario.setPassword(pass);
+		nuevoUsuario.setCorreo(correo);
+				
+		//Lista de Direcciones
+		List<Direccion> direcciones = new ArrayList<Direccion>();
 		
-		// direccion hay que pasarle una lista de direcciones , tenes que hacerlo despues
-		em.persist(u);
+		//Nueva Direccion
+		Direccion nuevaDireccion = new Direccion();
+		nuevaDireccion.setCalle(direccion);
+		nuevaDireccion.setNumeroAPTO("001");
+		nuevaDireccion.setNumeroDePuerta(2283);
+		direcciones.add(nuevaDireccion);
 		
-		Direccion d = new Direccion();
-		d.setCalle(direccion);
-		em.persist(d);
+		//Agregamos las direcciones al usuario y guardamos.
+		nuevoUsuario.setDirecciones(direcciones);
+		em.persist(nuevoUsuario);
 		
 		em.getTransaction().commit();
 		em.close();
@@ -182,6 +193,106 @@ public class PersistenceHelper {
 		emf.close();
 		
 		return producto;
+	}
+	
+	public void confirmarOrden(Orden _orden){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Farmacia f = em.find(Farmacia.class, _orden.getFarmacia().getId());
+
+		FormaPago fp = em.find(FormaPago.class, _orden.getFormaDePAgo().getId());
+		
+		Usuario u = em.find(Usuario.class, _orden.getUsuario().getId());
+		
+		BigDecimal ordenTotal = _orden.getTotal();
+		
+		String aclaracion = _orden.getAclaracion();
+		
+		Orden orden = new Orden();
+		orden.setAclaracion(aclaracion);
+		orden.setFarmacia(f);
+		orden.setFechaOrden(new Date(System.currentTimeMillis()));
+		orden.setFormaDePAgo(fp);
+		orden.setUsuario(u);
+		orden.setTotal(ordenTotal);
+
+		em.persist(orden);
+
+		for (ProductoOrden produOrden : _orden.getProductoOrden()) {
+			Producto produ = em.find(Producto.class, produOrden.getProducto().getId());
+			ProductoOrden po = new ProductoOrden();
+			po.setOrden(orden);
+			po.setProducto(produ);
+			em.persist(po);
+		}
+				
+		em.getTransaction().commit();
+		em.close();
+		emf.close();		
+	}
+
+	public Usuario getUsuarioById(Long id){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		Usuario usuario = em.find(Usuario.class, id);
+		
+		em.close();
+		emf.close();
+		return usuario;
+	}
+	
+
+	public void puntuarOrden(long idOrden, float puntaje){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Orden laOrden = em.find(Orden.class, idOrden);
+		laOrden.setPuntaje(puntaje);
+
+		/*
+		Farmacia f = em.find(Farmacia.class, _orden.getFarmacia().getId());
+
+		FormaPago fp = em.find(FormaPago.class, _orden.getFormaDePAgo().getId());
+		
+		Usuario u = em.find(Usuario.class, _orden.getUsuario().getId());
+		
+		BigDecimal ordenTotal = _orden.getTotal();
+		
+		String aclaracion = _orden.getAclaracion();
+		
+		Float puntaje = _orden.getPuntaje();
+		
+		Orden orden = new Orden();
+		orden.setAclaracion(aclaracion);
+		orden.setFarmacia(f);
+		orden.setFechaOrden(new Date(System.currentTimeMillis()));
+		orden.setFormaDePAgo(fp);
+		orden.setUsuario(u);
+		orden.setPuntaje(puntaje);
+		orden.setTotal(ordenTotal);
+
+*/
+		
+/*
+		for (ProductoOrden produOrden : _orden.getProductoOrden()) {
+			Producto produ = em.find(Producto.class, produOrden.getProducto().getId());
+			ProductoOrden po = new ProductoOrden();
+			po.setOrden(orden);
+			po.setProducto(produ);
+			em.persist(po);
+		}
+		*/
+		em.merge(laOrden);
+				
+		em.getTransaction().commit();
+		em.close();
+		emf.close();		
 	}
 	
 	private void puntuarFarmacia(Farmacia famacia, Orden orden){

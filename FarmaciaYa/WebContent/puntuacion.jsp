@@ -18,7 +18,23 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	
+	<%
+
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("user") == null){
+	response.sendRedirect("inicio.jsp");
+}else user = (String) session.getAttribute("user");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
 	<%@include file="Includes/header.jsp" %>
 	
 	<br>
@@ -52,7 +68,10 @@
                     <small><p> (<% out.println(session.getAttribute("cantPedidos")); %> Pedidos)</p></small>
                 </h1>
                 
-                <!-- PUNTUACION PEDIDO FARMACIA 1 -->
+                
+                <%=request.getAttribute("resultadoPuntuacion")%>
+                
+                <!--  
                 <div class="well">
                     <div class="row">
                         <div class="col-lg-2">
@@ -61,12 +80,13 @@
                             </a>
                         </div>
                         <div class="col-lg-10">
-                            <form class="form-horizontal">
+                            <form action="PuntuarServlet" method="post" class="form-horizontal">
                                 <div class="form-group">
-                                    <p>Farmacia 8 de Octubre</p>
-                                    <p>Pedido:  Zolve $150 + Aspirina $200 Total $250 </p>
-                                    <p>Fecha: 31/10/2015</p>
+                                    <p>#nombreFarmacia#</p>
+                                    <p>Pedido:  #elPedido# </p>
+                                    <p>Fecha: #fechaPedido#</p>
                                     <div class="col-md-10 columns">
+                                    	<input type="hidden" name="idOrdenAPuntuar" value="#idOrdenAPuntuar#"/>
                                         <label class="radio-inline">
                                             <input type="radio" name="Radios" id="Radios_MMala" value="1">
                                                 Muy mala
@@ -76,7 +96,7 @@
                                                 Mala
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="Radios" id="Radios_Buena" value="3">
+                                            <input type="radio" name="Radios" id="Radios_Buena" value="3" checked>
                                                 Buena
                                         </label>
                                         <label class="radio-inline">
@@ -95,7 +115,6 @@
                     </div>
                 </div>
 
-                <!-- PUNTUACION PEDIDO FARMACIA 2 -->
                 <div class="well">
                     <div class="row">
                         <div class="col-lg-2">
@@ -106,9 +125,9 @@
                         <div class="col-lg-10">
                             <form class="form-horizontal">
                                 <div class="form-group">
-                                    <p>Farmacia 8 de Octubre</p>
-                                    <p>Pedido:  Zolve $150 + Aspirina $200 Total $250 </p>
-                                    <p>Fecha: 31/10/2015</p>
+                                    <p>#nombreFarmacia#</p>
+                                    <p>Pedido:  #elPedido# </p>
+                                    <p>Fecha: #fechaPedido# </p>
                                     <div class="col-md-10 columns">
                                         <label class="radio-inline">
                                             <input type="radio" name="Radios" id="Radios_MMala" value="1" checked disabled>
@@ -136,6 +155,7 @@
                         </div>
                     </div>
                 </div>
+                -->
 
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">

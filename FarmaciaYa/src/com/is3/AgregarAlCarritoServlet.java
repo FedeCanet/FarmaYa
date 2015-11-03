@@ -1,6 +1,7 @@
 package com.is3;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.is3.bo.Farmacia;
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
+import com.is3.bo.ProductoOrden;
 
 public class AgregarAlCarritoServlet extends HttpServlet {
 	
@@ -27,7 +29,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+				
 		PersistenceHelper per = new PersistenceHelper();
 		HttpSession session = request.getSession();
 		
@@ -82,12 +84,18 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 		Producto producto = per.obtenerProducto(idProducto);
 		String farmaciaCarritoStructura = Parameters.getParameter("farmaciaCarritoStructura");
 	
-		if(orden.getProductos() != null && orden.getProductos().size() > 0){
-			ArrayList<Producto> losProductos = (ArrayList<Producto>)orden.getProductos();
+		if(orden.getProductoOrden() != null && orden.getProductoOrden().size() > 0){
+			
+			
+			for (ProductoOrden productoOrden : orden.getProductoOrden()) {
+				System.out.println(productoOrden.getProducto().getNombre());
+			}
 			
 			String productosEnElCarrito = "";
 			double total = 0.0;
-			for (Producto producto2 : losProductos) {
+			
+			for (ProductoOrden productoOrden : orden.getProductoOrden()) {
+				Producto producto2 = productoOrden.getProducto();			
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
@@ -98,12 +106,14 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 			}
 			
 			if(producto != null){
-				
-				if(orden.getProductos() == null){
-					orden.setProductos( new ArrayList<Producto>());
+				ProductoOrden prodOrden = new ProductoOrden();
+				if(orden.getProductoOrden() == null){
+					orden.setProductoOrden(new ArrayList<ProductoOrden>());
 				}
 				
-				orden.getProductos().add(producto);
+				prodOrden.setOrden(orden);
+				prodOrden.setProducto(producto);
+				orden.getProductoOrden().add(prodOrden);
 				
 				//Aspirina
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
@@ -127,16 +137,21 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(total));
 				
 				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);	
-			}	
+			}
+			
+			orden.setTotal(new BigDecimal(total));
 			
 		}else{
 			if(producto != null){
 				
-				if(orden.getProductos() == null){
-					orden.setProductos( new ArrayList<Producto>());
+				ProductoOrden prodOrden = new ProductoOrden();
+				if(orden.getProductoOrden() == null){
+					orden.setProductoOrden(new ArrayList<ProductoOrden>());
 				}
 				
-				orden.getProductos().add(producto);
+				prodOrden.setOrden(orden);
+				prodOrden.setProducto(producto);
+				orden.getProductoOrden().add(prodOrden);
 				
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
 				
@@ -149,12 +164,15 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(producto.getPrecioUnitario()));
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(producto.getPrecioUnitario()));
 				
-				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);		
+				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);	
+				
+				orden.setTotal(new BigDecimal(String.valueOf(producto.getPrecioUnitario())));
 			}		
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/farmacia.jsp");
         rd.forward(request, response);
+        
 	}	
 
 }

@@ -3,7 +3,6 @@ package com.is3.bo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,13 +17,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 
 @NamedQueries({
-//	@NamedQuery(name = "getDispositivoPorNumero", query = "SELECT d.id FROM Dispositivo d WHERE d.numeroDispositivo = :numero"), 
+//	@NamedQuery(name = "getDispositivoPorNumero", query = "SELECT d.id FROM Dispositivo d WHERE d.numeroDispositivo = :numero"),
 })
 @Entity
 @Table(name = "FAR_T_FARMACIA")
@@ -41,30 +39,27 @@ public class Farmacia implements Serializable {
 	private Date fechaCreacion;
 	@Column(nullable=false)
 	private String nombre ;
-	
+
 	private String descripcion ;
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, optional=false)
 	private Direccion direccion;
-	
-//	@ManyToOne(optional = true)
-//	@JoinColumn(name = "PRODUCTO_FK", referencedColumnName = "ID")
-//	private Producto producto;
+
 	private Long importeMinimo ;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioDesde;
 	@Temporal(TemporalType.TIME)
 	private Date horarioHasta;
 	@Column(nullable=false)
-	private boolean tieneDelivery; //Esto lo pidio Gonzalo. 
+	private boolean tieneDelivery; //Esto lo pidio Gonzalo.
 	private float puntaje;//este se calcula  como la suma de todas las ordenes puntuadas dividido la cantidad de ordenes puntuadas
 	private int cantPuntuajes;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "FORMA_DE_PAGO_FK", referencedColumnName = "ID")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FormaPago> formasDePago;
-	
+
 
 	public long getId() {
 		return id;
@@ -138,7 +133,6 @@ public class Farmacia implements Serializable {
 		this.tieneDelivery = tieneDelivery;
 	}
 
-
 	public float getPuntaje() {
 		return puntaje;
 	}
@@ -162,9 +156,4 @@ public class Farmacia implements Serializable {
 	public void setFormasDePago(List<FormaPago> formasDePago) {
 		this.formasDePago = formasDePago;
 	}
-
-	
-	
-	
-
 }
