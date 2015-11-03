@@ -2,23 +2,14 @@ package com.is3.bo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 
 @NamedQueries({
 //		@NamedQuery(name = "getModelos", query = "SELECT m FROM Modelo m"),
@@ -34,7 +25,7 @@ public class Producto implements Serializable {
 	@SequenceGenerator(name = "secuenciaProducto", sequenceName = "FAR_S_PRODUCTO_SEC", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuenciaProducto")
 	private long id;
-	
+
 	@Column(nullable=false)
 	private String nombre;
 	@Column(nullable=false)
@@ -42,15 +33,8 @@ public class Producto implements Serializable {
 	@Column(nullable=false)
 	private String descBusqueda; //buscar por este campo, ejemplo "Pastilla Pildora etc"
 	@Column(nullable=false)
-	private BigDecimal precioUnitario;	
+	private BigDecimal precioUnitario;
 	private int cantidad;
-	
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "PRODUCTO_FK", referencedColumnName = "ID")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<ProductoOrden> productoOrdenes;
-	
 
 	public long getId() {
 		return id;
@@ -91,6 +75,4 @@ public class Producto implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-
-	
 }

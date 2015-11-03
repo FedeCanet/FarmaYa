@@ -205,8 +205,14 @@
 		</div>
 		<div class="name">#NombreProducto#</div>
 		<div class="price">$#PrecioProducto#</div>
-		<div class="remove">
-			<button type="button" class="button none" title="Quitar">Quitar</button>
+		<!-- <div class="remove"> -->
+		<div>
+			<form action="EliminarDelCarritoServlet" method="post">
+				<input type="hidden" name="idFarmacia" value="#idFarmacia#"/>
+				<input type="hidden" name="idProducto" value="#idProducto#"/>
+				<!-- <button type="button" class="button none" title="Quitar">Quitar</button> -->
+				<button class="btn btn-xs btn-default" title="Quitar">Quitar</button>
+			</form>
 		</div>
 	</li>
 	]]>
@@ -241,6 +247,96 @@
 			</aside>
 	]]>
 	</farmaciaCarritoVacio>
+	<ordenParaPuntuar>
+	    <![CDATA[
+	    <div class="well">
+          <div class="row">
+              <div class="col-lg-2">
+                  <a href="#">
+                      <img class="img-responsive" src="images/imagefotofarmacia.jpg" alt="Imagen de la Farmacia">
+                  </a>
+              </div>
+              <div class="col-lg-10">
+                  <form action="PuntuarServlet" method="post" class="form-horizontal">
+                      <div class="form-group">
+                          <p>#nombreFarmacia#</p>
+                          <p>Pedido:  #elPedido# </p>
+                          <p>Fecha: #fechaPedido#</p>
+                          <div class="col-md-10 columns">
+                          	<input type="hidden" name="idOrdenAPuntuar" value="#idOrdenAPuntuar#"/>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_MMala" value="1">
+                                      Muy mala
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_Mala" value="2">
+                                      Mala
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_Buena" value="3" checked>
+                                      Buena
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_MBuena" value="4">
+                                      Muy Buena
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_Excelente" value="5">
+                                      Excelente
+                              </label>
+                          </div>
+                      </div>
+                      <button class="btn btn-primary">CALIFICAR </button>
+                  </form>
+              </div>
+          </div>
+      </div>
+	    ]]>
+	</ordenParaPuntuar>
+	<ordenPuntuada>
+	    <![CDATA[
+	    <div class="well">
+          <div class="row">
+              <div class="col-lg-2">
+                  <a href="#">
+                      <img class="img-responsive" src="images/imagefotofarmacia.jpg" alt="Imagen de la Farmacia">
+                  </a>
+              </div>
+              <div class="col-lg-10">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <p>#nombreFarmacia#</p>
+                          <p>Pedido:  #elPedido# </p>
+                          <p>Fecha: #fechaPedido# </p>
+                          <div class="col-md-10 columns">
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_MMala" value="1" #statusMMala#>
+                                      Muy mala
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_Mala" value="2" #statusMala#>
+                                      Mala
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_Buena" value="3" #statusBuena#>
+                                      Buena
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_MBuena" value="4" #statusMBuena#>
+                                      Muy Buena
+                              </label>
+                              <label class="radio-inline">
+                                  <input type="radio" name="Radios" id="Radios_Excelente" value="5" #statusExcelente#>
+                                      Excelente
+                              </label>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+	    ]]>
+	</ordenPuntuada>
 	<farmaciaCarrito>
 	<![CDATA[
 	<aside id="cartContainer" class="large-4 medium-4 small-4 columns">

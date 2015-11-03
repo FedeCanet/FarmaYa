@@ -150,7 +150,11 @@ public class Posicion {
 			this.setLongitud(longitud);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace(); NO LANZAMOS ERROR!!!!
+			this.setDireccion("Avenida 18 de Julio");
+			this.setCiudad("Montevideo");
+			this.setLatitud(new Float(-34.9054852));
+			this.setLongitud(new Float(-56.1852975));
 		}
 	}
 	

@@ -7,9 +7,26 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/estilos.css">
-<title>Insert title here</title>
+<title>Farmacia</title>
 </head>
 <body>
+<%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("user") == null){
+	response.sendRedirect("inicio.jsp");
+}else user = (String) session.getAttribute("user");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
+<!--
 	<header> <nav class="navbar navbar-inverse navbar-static-top"
 		role="navigation">
 	<div class="container">
@@ -23,10 +40,8 @@
 			<a href="#" class="navbar-brand">FarmaciaYa.com</a>
 		</div>
 
-		<!-- MENU Prueba -->
 		<div class="collapse navbar-collapse" id="navegacion-isf3">
 			<ul class="nav navbar-nav">
-				<!-- <li class="active"><a href="inicio.jsp">Inicio</a></li> -->
 				<li><a href="#">Mis Calificaciones</a></li>
 			</ul>
 
@@ -45,6 +60,9 @@
 		</div>
 	</div>
 	</nav> </header>
+	-->
+	
+	<%@include file="Includes/header.jsp" %>
 
 	<div class="container">
 
