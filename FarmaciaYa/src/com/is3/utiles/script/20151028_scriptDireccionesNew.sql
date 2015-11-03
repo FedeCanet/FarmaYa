@@ -29,3 +29,5 @@ INSERT INTO "public"."far_t_direccion" (id,calle,latitud,longitud,numeroapto,num
 INSERT INTO "public"."far_t_direccion" (id,calle,latitud,longitud,numeroapto,numerodepuerta,usuario_fk,ciudad) VALUES (40,'1974, Avenida Gonzalo Ramirez, Parque Rodo, Montevideo',-34.9117873965113,-56.1721245690033,null,1974,null,'Montevideo');
 INSERT INTO "public"."far_t_direccion" (id,calle,latitud,longitud,numeroapto,numerodepuerta,usuario_fk,ciudad) VALUES (41,'2706, Quebracho, Villa Dolores, Punta Carretas, Montevideo',-34.9110416492172,-56.1583559560974,null,2706,null,'Montevideo');
 INSERT INTO "public"."far_t_direccion" (id,calle,latitud,longitud,numeroapto,numerodepuerta,usuario_fk,ciudad) VALUES (42,'Plaza de los Treinta Y Tres, Colonia, Centro, Montevideo',-34.90363,-56.1805635,null,1990,null,'Montevideo');
+ALTER SEQUENCE FAR_S_DIRECCION_SEC RESTART with 100;
+
