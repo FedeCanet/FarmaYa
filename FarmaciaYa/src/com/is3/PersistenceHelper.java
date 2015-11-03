@@ -254,40 +254,7 @@ public class PersistenceHelper {
 		
 		Orden laOrden = em.find(Orden.class, idOrden);
 		laOrden.setPuntaje(puntaje);
-
-		/*
-		Farmacia f = em.find(Farmacia.class, _orden.getFarmacia().getId());
-
-		FormaPago fp = em.find(FormaPago.class, _orden.getFormaDePAgo().getId());
 		
-		Usuario u = em.find(Usuario.class, _orden.getUsuario().getId());
-		
-		BigDecimal ordenTotal = _orden.getTotal();
-		
-		String aclaracion = _orden.getAclaracion();
-		
-		Float puntaje = _orden.getPuntaje();
-		
-		Orden orden = new Orden();
-		orden.setAclaracion(aclaracion);
-		orden.setFarmacia(f);
-		orden.setFechaOrden(new Date(System.currentTimeMillis()));
-		orden.setFormaDePAgo(fp);
-		orden.setUsuario(u);
-		orden.setPuntaje(puntaje);
-		orden.setTotal(ordenTotal);
-
-*/
-		
-/*
-		for (ProductoOrden produOrden : _orden.getProductoOrden()) {
-			Producto produ = em.find(Producto.class, produOrden.getProducto().getId());
-			ProductoOrden po = new ProductoOrden();
-			po.setOrden(orden);
-			po.setProducto(produ);
-			em.persist(po);
-		}
-		*/
 		em.merge(laOrden);
 				
 		em.getTransaction().commit();

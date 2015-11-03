@@ -3,6 +3,7 @@ package com.is3;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.is3.bo.Direccion;
 import com.is3.bo.Farmacia;
 import com.is3.bo.Orden;
 import com.is3.bo.Producto;
 import com.is3.bo.ProductoOrden;
+import com.is3.bo.Usuario;
 
 public class AgregarAlCarritoServlet extends HttpServlet {
 	
@@ -35,12 +38,25 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 		
 		Orden orden = null;
 		
+		String direccionAEntregar = "8 de Octubre 2487 Apto 203";
+		
 		if(session.getAttribute("elCarrito") != null){
 			orden = (Orden)session.getAttribute("elCarrito");
+			if(orden.getUsuario() != null){
+				Usuario usu = orden.getUsuario();
+				if(usu != null){
+					List<Direccion> direcciones = usu.getDirecciones();
+					for (Direccion direccion : direcciones) {
+						direccionAEntregar = direccion.getCalle();
+					}
+				}
+			}			
 		}else{
 			orden = new Orden();
 			session.setAttribute("elCarrito", orden);
 		}
+		
+		
 		
 		//Presentacion
 		Long farmaciaId = Long.parseLong(request.getParameter("idFarmacia"));
@@ -126,12 +142,14 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				String totalDeProductos = productosEnElCarrito + " " + farmaciaCarritoProducto;
 				total += Double.parseDouble(String.valueOf(producto.getPrecioUnitario()));
 				
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#direccionAEntregar#", direccionAEntregar);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", totalDeProductos);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(total));
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(total));
 				
 				request.setAttribute("farmaciaCarrito", farmaciaCarritoStructura);		
 			}else{
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#direccionAEntregar#", direccionAEntregar);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", productosEnElCarrito);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(total));
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(total));
@@ -160,6 +178,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto.getId()));
 				
+				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#direccionAEntregar#", direccionAEntregar);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", farmaciaCarritoProducto);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#subtotal#", String.valueOf(producto.getPrecioUnitario()));
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#total#", String.valueOf(producto.getPrecioUnitario()));
