@@ -38,7 +38,8 @@ psswd = Document.GetElementById("contrasena")
 				%>
 					<div class="text-center">
 						<br>
-					<form action="" method="post">
+					<form action="ActualizarContrasena" method="post">
+						<input name="userId" id="userId" type="text" value="<% out.println(request.getParameter("userid")); %>" style="display:none;">
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon">Contraseña:</span>

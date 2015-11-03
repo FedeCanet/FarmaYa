@@ -262,6 +262,31 @@ public class PersistenceHelper {
 		emf.close();		
 	}
 	
+	public void actualizarContrasena(String correo, String nuevaPass){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Query queryCinco = em.createQuery("SELECT u " +
+				"FROM Usuario u " +
+				"where u.correo = :correo");
+
+		queryCinco.setParameter("correo", correo);
+		
+		ArrayList usuarios = (ArrayList)queryCinco.getResultList();
+		
+		if(usuarios.size() > 0){
+			Usuario usuario = (Usuario)usuarios.get(0);
+			usuario.setPassword(nuevaPass);
+			em.merge(usuario);
+		}
+				
+		em.getTransaction().commit();
+		em.close();
+		emf.close();		
+	}
+	
 	private void puntuarFarmacia(Farmacia famacia, Orden orden){
 		// pablo se encarga de terminar esto     cant 12 promedio 4.1 entonces  (4.1 * 12 + nuevo puntaje) /  (12 +1)  
 	}
