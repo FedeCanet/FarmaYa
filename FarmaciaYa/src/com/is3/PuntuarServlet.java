@@ -37,7 +37,8 @@ public class PuntuarServlet extends HttpServlet {
 
 		per.puntuarOrden(idOrdenAPuntuar, elPuntaje);	
 		
-		
+		per.puntuarFarmacia(idOrdenAPuntuar, elPuntaje);
+				
 		HttpSession session = request.getSession();		
 		if(session.getAttribute("elCarrito") != null){
 			Orden orden = (Orden)session.getAttribute("elCarrito");
