@@ -103,4 +103,15 @@
     <servlet-name>Hello11</servlet-name>
     <url-pattern>/PuntuarServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Hello12</servlet-name>
+    <servlet-class>com.is3.ActualizarContrasena</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello12</servlet-name>
+    <url-pattern>/ActualizarContrasena</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

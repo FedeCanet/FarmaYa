@@ -25,7 +25,8 @@ public class RecoverPasswordServlet extends HttpServlet implements Servlet {
 		if (EnvioCorreo.verificarCorreo(correo)) {
 			try {
 				
-				EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
+				//EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
+				EnvioCorreo.enviarCorreoRecuperarPassword(correo);
 				String MsgExito = "Correo Enviado a " + correo + "!";
 				request.setAttribute("title", MsgExito);
 				request.setAttribute("text", "Te hemos enviado un correo electronico a tu casilla, en el hay instrucciones con los pasos a seguir.");

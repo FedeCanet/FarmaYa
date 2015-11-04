@@ -32,7 +32,6 @@ if(session.getAttribute("user") != null){
 					<p>para pedir productos farmacéuticos.</p>
 					<p>Más de 250 Farmacias disponibles</p>
 					<p>24/7</p>
-					<p><a href="#" class="btn btn-primary btn-lg">Leer mas</a></p>
 				</div>
 			
 				<div class="col-xs-13">

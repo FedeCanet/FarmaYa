@@ -3,6 +3,8 @@ package com.is3;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -36,6 +38,19 @@ public class UsuarioServlet extends HttpServlet implements Servlet {
 		persistHelper.addUsuario(nombre,  apellido, correo, direccion, password);
 		
 		if(persistHelper.existUsuario(correo, password)){
+			
+			//Mandar Mail
+			try {
+				EnvioCorreo.enviarCorreoConfirmarUsuario(correo);
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("user", correo);
 			//setting session to expiry in 30 mins

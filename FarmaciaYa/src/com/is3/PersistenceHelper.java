@@ -254,40 +254,7 @@ public class PersistenceHelper {
 		
 		Orden laOrden = em.find(Orden.class, idOrden);
 		laOrden.setPuntaje(puntaje);
-
-		/*
-		Farmacia f = em.find(Farmacia.class, _orden.getFarmacia().getId());
-
-		FormaPago fp = em.find(FormaPago.class, _orden.getFormaDePAgo().getId());
 		
-		Usuario u = em.find(Usuario.class, _orden.getUsuario().getId());
-		
-		BigDecimal ordenTotal = _orden.getTotal();
-		
-		String aclaracion = _orden.getAclaracion();
-		
-		Float puntaje = _orden.getPuntaje();
-		
-		Orden orden = new Orden();
-		orden.setAclaracion(aclaracion);
-		orden.setFarmacia(f);
-		orden.setFechaOrden(new Date(System.currentTimeMillis()));
-		orden.setFormaDePAgo(fp);
-		orden.setUsuario(u);
-		orden.setPuntaje(puntaje);
-		orden.setTotal(ordenTotal);
-
-*/
-		
-/*
-		for (ProductoOrden produOrden : _orden.getProductoOrden()) {
-			Producto produ = em.find(Producto.class, produOrden.getProducto().getId());
-			ProductoOrden po = new ProductoOrden();
-			po.setOrden(orden);
-			po.setProducto(produ);
-			em.persist(po);
-		}
-		*/
 		em.merge(laOrden);
 				
 		em.getTransaction().commit();
@@ -295,7 +262,40 @@ public class PersistenceHelper {
 		emf.close();		
 	}
 	
-	private void puntuarFarmacia(Farmacia famacia, Orden orden){
-		// pablo se encarga de terminar esto     cant 12 promedio 4.1 entonces  (4.1 * 12 + nuevo puntaje) /  (12 +1)  
+	public void actualizarContrasena(String correo, String nuevaPass){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Query queryCinco = em.createQuery("SELECT u " +
+				"FROM Usuario u " +
+				"where u.correo = :correo");
+
+		queryCinco.setParameter("correo", correo);
+		
+		ArrayList usuarios = (ArrayList)queryCinco.getResultList();
+		
+		if(usuarios.size() > 0){
+			Usuario usuario = (Usuario)usuarios.get(0);
+			usuario.setPassword(nuevaPass);
+			em.merge(usuario);
+		}
+				
+		em.getTransaction().commit();
+		em.close();
+		emf.close();		
+	}
+	
+	private void puntuarFarmacia(Farmacia farmacia, Orden orden){
+		// cant 12 promedio 4.1 entonces  (4.1 * 12 + nuevo puntaje) /  (12 +1)  
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		float puntajeNuevo = (farmacia.getPuntaje() * farmacia.getCantPuntuajes()) + orden.getPuntaje() / (farmacia.getCantPuntuajes() +1);
+		farmacia.setPuntaje(puntajeNuevo);
+		em.merge(farmacia);
+		em.getTransaction().commit();
+		em.close();
+		emf.close();
 	}
 }
