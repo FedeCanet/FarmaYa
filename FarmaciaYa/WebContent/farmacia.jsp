@@ -81,7 +81,7 @@ for(Cookie cookie : cookies){
 			<div class="col-md-4">
 
 				<!-- Blog Search Well -->
-				<div class="well">
+				<div class="well" style="display: none;">
 					<h4>Buscar por nombre de Producto:</h4>
 					<div class="input-group">
 						<input type="text" class="form-control"> <span
