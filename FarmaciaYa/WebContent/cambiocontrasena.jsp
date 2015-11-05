@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
-
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
 <script>
     var hash = CryptoJS.MD5("Message");
@@ -12,7 +11,6 @@
 <script type="text/javascript">
 
 psswd = Document.GetElementById("contrasena")
-
 
 </script>
 	<meta charset="UTF-8">
@@ -42,19 +40,20 @@ psswd = Document.GetElementById("contrasena")
 						<input name="userId" id="userId" type="text" value="<% out.println(request.getParameter("userid")); %>" style="display:none;">
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon">Contraseña:</span>
-								<input type="password" name="contrasena" id="contrasena" type="text" class="form-control">
+								<span class="input-group-addon">Contrasena:</span>
+								<input type="password" name="contrasena" id="contrasena" type="text" class="form-control" data-error="Complete este campo" required>
 							</div>
 						</div>	
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon">Repita Contraseña:</span>
-								<input type="password" name="contrasenaRepetida" type="text"  class="form-control">
+								<span class="input-group-addon">Repita Contrasena:</span>
+								<input type="password" name="contrasenaRepetida" type="text"  class="form-control" data-error="Complete este campo" required>
+								<% if(request.getAttribute("diferentesContrasenas")!=null){out.println(request.getAttribute("diferentesContrasenas"));} %>
 							</div>
 						</div>
 										
 						<button type="submit" name="Submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-					</FORM>
+					</form>				
 					</div>
 				</div>
 			</div>

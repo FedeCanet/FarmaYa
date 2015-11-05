@@ -2,6 +2,7 @@ package com.is3;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,17 +26,32 @@ public class ActualizarContrasena extends HttpServlet {
 		
 		PersistenceHelper per = new PersistenceHelper();
 		
+		boolean result = false;
+		String mensaje = "";
+		
 		if(request.getParameter("userId") != null){
 			String UserID = String.valueOf(request.getParameter("userId"));
 			String nuevaPass = request.getParameter("contrasena");
 			String nuevaPassRepetida = request.getParameter("contrasenaRepetida");
-			
-			if(nuevaPass.compareTo(nuevaPassRepetida) == 0){
-				per.actualizarContrasena(UserID, nuevaPass);
+			if(UserID != null && UserID.compareTo("null") != 0){
+				if(nuevaPass.compareTo(nuevaPassRepetida) == 0){
+					per.actualizarContrasena(UserID, nuevaPass);
+					result = true;
+				}else{
+					mensaje = "La contrasena y su repeticion no son iguales";
+				}
+			}else{
+				mensaje = "Faltan datos, intente nuevamente desde su casilla de correo.";
 			}
 		}
-		
-		response.sendRedirect("inicio.jsp");
+		if(result){
+			response.sendRedirect("inicio.jsp");
+		}else{
+			request.setAttribute("diferentesContrasenas", mensaje);
+			RequestDispatcher rd = request.getRequestDispatcher("/cambiocontrasena.jsp");
+	        rd.forward(request, response);
+		}
+			
 	}
 
 	
