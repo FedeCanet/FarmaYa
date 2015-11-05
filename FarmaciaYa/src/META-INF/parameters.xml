@@ -14,8 +14,10 @@
 		Bienvenido a FarmaYa!, <br> para terminar de activar su cuenta haga click #link#
 		]]>
 	</confirmarUsuarioBody>
-	<urlRecoverPassword>http://localhost:8080/FarmaciaYa/cambiocontrasena.jsp</urlRecoverPassword>
-	<urlConfirmarUsuario>http://localhost:8080/FarmaciaYa/ConfirmarMail</urlConfirmarUsuario>	
+	<!-- <urlRecoverPassword>http://localhost:8080/FarmaciaYa/cambiocontrasena.jsp</urlRecoverPassword>  -->
+	<urlRecoverPassword>http://ec2-52-23-240-0.compute-1.amazonaws.com/FarmaciaYa/cambiocontrasena.jsp</urlRecoverPassword>  -->
+	<!-- <urlConfirmarUsuario>http://localhost:8080/FarmaciaYa/ConfirmarMail</urlConfirmarUsuario> -->	
+	<urlConfirmarUsuario>http://ec2-52-23-240-0.compute-1.amazonaws.com/FarmaciaYa/ConfirmarMail</urlConfirmarUsuario>
 	<pedidoRegistradoSubject>FarmaYa! - Pedido Registrado</pedidoRegistradoSubject>
 	<pedidoRegistradoBody>
 		<![CDATA[
