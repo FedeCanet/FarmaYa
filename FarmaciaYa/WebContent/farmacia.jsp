@@ -15,8 +15,6 @@
 <script>
 function loadImage() {
 	document.getElementById("buttonhid").click();
-
-
 }
 </script>
 
