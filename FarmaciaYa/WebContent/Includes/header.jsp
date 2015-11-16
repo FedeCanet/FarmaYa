@@ -8,7 +8,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="#" class="navbar-brand">FarmaciaYa.com</a>
+					<a href="inicio.jsp" class="navbar-brand">FarmaciaYa.com</a>
 				</div>
 
 				<!-- MENU Prueba -->

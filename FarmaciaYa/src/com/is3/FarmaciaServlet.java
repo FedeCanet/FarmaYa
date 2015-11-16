@@ -55,7 +55,7 @@ public class FarmaciaServlet extends HttpServlet {
 		
 		request.setAttribute("farmaciaPresentacion", farmaciaPresentacion);
 		
-		String productos = null;
+		String productos = "";
 		
 		ArrayList<Producto> listaProductos = (ArrayList)per.obtenerProductos();
 		for (int i = 0; i < 5; i++) {

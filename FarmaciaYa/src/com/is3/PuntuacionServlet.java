@@ -44,6 +44,7 @@ public class PuntuacionServlet extends HttpServlet {
 				for (Orden laOrden : ordenes) {
 					
 					String nombreFarmacia = laOrden.getFarmacia().getNombre();
+					String puntaje = String.valueOf(laOrden.getFarmacia().getPuntaje());
 					String fechaOrden = String.valueOf(laOrden.getFechaOrden());
 					String pedido = "";
 					
@@ -63,6 +64,7 @@ public class PuntuacionServlet extends HttpServlet {
 						//Ya fue puntuada, recuperamos HTML puntuado.
 						String ordenPuntuada = Parameters.getParameter("ordenPuntuada");
 						ordenPuntuada = ordenPuntuada.replace("#nombreFarmacia#", nombreFarmacia);
+						ordenPuntuada = ordenPuntuada.replace("#Puntaje#", puntaje);
 						ordenPuntuada = ordenPuntuada.replace("#elPedido#", pedido);
 						ordenPuntuada = ordenPuntuada.replace("#fechaPedido#", fechaOrden);
 						
@@ -117,6 +119,7 @@ public class PuntuacionServlet extends HttpServlet {
 						//Aun no ha sido puntuada, recuperamos el HTML sin puntuar.
 						String ordenParaPuntuar = Parameters.getParameter("ordenParaPuntuar");
 						ordenParaPuntuar = ordenParaPuntuar.replace("#nombreFarmacia#", nombreFarmacia);
+						ordenParaPuntuar = ordenParaPuntuar.replace("#Puntaje#", puntaje);
 						ordenParaPuntuar = ordenParaPuntuar.replace("#elPedido#", pedido);
 						ordenParaPuntuar = ordenParaPuntuar.replace("#fechaPedido#", fechaOrden);
 						ordenParaPuntuar = ordenParaPuntuar.replace("#idOrdenAPuntuar#", String.valueOf(laOrden.getId()));

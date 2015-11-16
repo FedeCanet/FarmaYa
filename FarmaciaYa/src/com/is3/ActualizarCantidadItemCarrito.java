@@ -19,7 +19,7 @@ import com.is3.bo.Producto;
 import com.is3.bo.ProductoOrden;
 import com.is3.bo.Usuario;
 
-public class EliminarDelCarritoServlet extends HttpServlet {
+public class ActualizarCantidadItemCarrito extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -29,13 +29,14 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		String selectedItemRow = "selected='selected'";
+
 		PersistenceHelper per = new PersistenceHelper();
 		HttpSession session = request.getSession();
+		
+		long str_selected_value = Long.valueOf(request.getParameter("qty_1610399"));
+		long idProductoCantidad = Long.valueOf(request.getParameter("idProductoCantidad"));
 		
 		Orden orden = null;
 		String direccionAEntregar = "8 de Octubre 2487 Apto 203";
@@ -56,7 +57,7 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 			session.setAttribute("elCarrito", orden);
 		}
 		
-		Long farmaciaId = Long.parseLong(request.getParameter("idFarmacia"));
+		Long farmaciaId = orden.getFarmacia().getId();
 		Farmacia laFarmacia = null;
 		
 		if(orden.getFarmacia() != null){
@@ -65,18 +66,7 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 			laFarmacia = per.obtenerFarmacia(farmaciaId);
 			orden.setFarmacia(laFarmacia);
 		}
-		
-		//Presentacion
-		Long productoIdAEliminar = Long.parseLong(request.getParameter("idProducto"));
-
-		
-		for (ProductoOrden prodOrden : orden.getProductoOrden()) {
-			if(prodOrden.getProducto().getId() == productoIdAEliminar){
-				orden.getProductoOrden().remove(prodOrden);
-				break;
-			}			
-		}
-		
+				
 		String farmaciaPresentacion = Parameters.getParameter("farmaciaPresentacion");
 		
 		if(laFarmacia != null){
@@ -119,14 +109,22 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 			for (ProductoOrden prodOrden : orden.getProductoOrden()) {
 				Producto producto2 = prodOrden.getProducto();
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
-				farmaciaCarritoProducto = setSelectedProduct(farmaciaCarritoProducto, producto2.getCantidad());
 				
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto2.getId()));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProductoCantidad#", String.valueOf(producto2.getId()));
-				total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario().doubleValue() * producto2.getCantidad()));
+				
+				if(producto2.getId() == idProductoCantidad){
+					producto2.setCantidad(new Integer(str_selected_value + ""));
+					total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario().doubleValue() * producto2.getCantidad()));
+				}else{
+					total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario().doubleValue() * producto2.getCantidad()));
+				}
+				
+				farmaciaCarritoProducto = setSelectedProduct(farmaciaCarritoProducto, producto2.getCantidad());
+				
 				productosEnElCarrito = productosEnElCarrito + " " + farmaciaCarritoProducto;
 			}
 			
@@ -145,7 +143,8 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/farmacia.jsp");
-        rd.forward(request, response);
+        rd.forward(request, resp);
+				
 	}
 	
 	public String setSelectedProduct(String str_row, int cant){
@@ -177,4 +176,5 @@ public class EliminarDelCarritoServlet extends HttpServlet {
 		
 		return str_row;
 	}
+
 }

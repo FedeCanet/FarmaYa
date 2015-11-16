@@ -29,8 +29,18 @@ public class BuscarServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 				
 		String direccion = null;
+		String productoOFarmacia = "";
+		boolean escribioProductoOFarmacia = false;
+		
 		if(request.getParameter("direccion") != null){
 			direccion = String.valueOf(request.getParameter("direccion"));
+		}
+		
+		if(request.getParameter("producto") != null){
+			productoOFarmacia = String.valueOf(request.getParameter("producto"));
+			if(productoOFarmacia.compareTo("") != 0 || productoOFarmacia.trim().compareTo("") != 0){
+				escribioProductoOFarmacia = true;
+			}
 		}
 		
 		String str_selected_value = String.valueOf(request.getParameter("ciudad"));
@@ -55,6 +65,14 @@ public class BuscarServlet extends HttpServlet {
 		
 		List <Farmacia> farmacias = per.obtenerFarmaciasCercanas(posicionUsuario);
 		
+		if(escribioProductoOFarmacia){
+			List<Farmacia> farmaciasPorNombre = per.obtenerFarmaciasCercanasPorNombre(posicionUsuario, productoOFarmacia);
+			if(farmaciasPorNombre.size() > 0){
+				escribioProductoOFarmacia = false;
+				farmacias = farmaciasPorNombre;
+			}
+		}
+		
 		String htmlBusqueda ="";
 		
 		if (farmacias.size()>0){
@@ -69,6 +87,7 @@ public class BuscarServlet extends HttpServlet {
 				String row = Parameters.getParameter("resultadodebusqueda");
 				row = row.replace("#idFarmacia#", idFarmacia);
 				row = row.replace("#nombreFarmacia#",nombre);
+				row = row.replace("#puntaje#", puntaje);
 				row = row.replace("#horario#",horario);
 				row = row.replace("#direccion#",calle);
 				row = row.replace("#importeMinimo#",pedidoMin);
@@ -77,6 +96,13 @@ public class BuscarServlet extends HttpServlet {
 		}else{
 			System.out.println("sin registros");
 		}
+		
+		String htmlBusquedaNoEncontradoPresentacion ="";
+		if(escribioProductoOFarmacia){
+			htmlBusquedaNoEncontradoPresentacion = Parameters.getParameter("resultadodebusquedaNoEncontradoPresentacion");
+			htmlBusquedaNoEncontradoPresentacion = htmlBusquedaNoEncontradoPresentacion.replace("#busquedaProductoOFarmacia#", productoOFarmacia);	
+		}
+		request.setAttribute("resultadodebusquedaNoEncontradoPresentacion", htmlBusquedaNoEncontradoPresentacion);
 		
 		String htmlBusquedaPresentacion = Parameters.getParameter("resultadodebusquedapresentacion");
 		request.setAttribute("resultadodebusqueda", htmlBusqueda);

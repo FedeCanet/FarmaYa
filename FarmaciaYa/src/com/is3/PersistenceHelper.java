@@ -130,6 +130,29 @@ public class PersistenceHelper {
 		return farmacias2;
 	}
 	
+	public List <Farmacia> obtenerFarmaciasCercanasPorNombre(Posicion p, String nombreFarmacia){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		TypedQuery<Farmacia> queryCinco = em.createQuery("SELECT f FROM Farmacia f where f.nombre like :parameter",Farmacia.class);
+		queryCinco.setParameter("parameter", nombreFarmacia);
+		
+		List<Farmacia> farmacias2 = new ArrayList<Farmacia>();
+		List<Farmacia> farmacias = queryCinco.getResultList();
+		for (Farmacia farm : farmacias){
+			Posicion p2 = new Posicion(farm.getDireccion());
+			//System.out.println("lat: "+p2.getLatitud()+" long: "+p2.getLongitud());
+			if (p.estaCerca(p2,1000)){
+				farmacias2.add(farm);
+			}
+		}
+		em.close();
+		emf.close();
+		return farmacias2;
+	}
+	
 	public Farmacia obtenerFarmacia(long idFarmacia){
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("prueba", new HashMap());
 		EntityManager em = emf.createEntityManager();

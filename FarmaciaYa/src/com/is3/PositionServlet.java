@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.is3.dto.Posicion;
 
@@ -32,7 +33,7 @@ public class PositionServlet extends HttpServlet implements Servlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
-				
+						
 		RequestDispatcher rd = request.getRequestDispatcher("/busqueda.jsp");
         rd.forward(request, response);
 		

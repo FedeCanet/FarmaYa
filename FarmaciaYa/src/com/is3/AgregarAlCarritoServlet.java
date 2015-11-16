@@ -35,7 +35,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				
 		PersistenceHelper per = new PersistenceHelper();
 		HttpSession session = request.getSession();
-		
+		String selectedItemRow = "selected='selected'";
 		Orden orden = null;
 		
 		String direccionAEntregar = "8 de Octubre 2487 Apto 203";
@@ -76,7 +76,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 		request.setAttribute("farmaciaPresentacion", farmaciaPresentacion);
 		
 		//Productos de la Farmacia
-		String productos = null;
+		String productos = "";
 		
 		ArrayList<Producto> listaProductos = (ArrayList)per.obtenerProductos();
 		for (int i = 0; i < 5; i++) {
@@ -110,18 +110,27 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 			String productosEnElCarrito = "";
 			double total = 0.0;
 			
+			
+			
 			for (ProductoOrden productoOrden : orden.getProductoOrden()) {
 				Producto producto2 = productoOrden.getProducto();			
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
+				
+								
+				
+				farmaciaCarritoProducto = setSelectedProduct(farmaciaCarritoProducto, producto2.getCantidad());
+				
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto2.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto2.getPrecioUnitario()));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto2.getId()));
-				total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario()));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProductoCantidad#", String.valueOf(producto2.getId()));
+				total += Double.parseDouble(String.valueOf(producto2.getPrecioUnitario().doubleValue() * producto2.getCantidad()));
 				productosEnElCarrito = productosEnElCarrito + " " + farmaciaCarritoProducto;
 			}
 			
 			if(producto != null){
+				producto.setCantidad(1);
 				ProductoOrden prodOrden = new ProductoOrden();
 				if(orden.getProductoOrden() == null){
 					orden.setProductoOrden(new ArrayList<ProductoOrden>());
@@ -133,14 +142,16 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				
 				//Aspirina
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
+				farmaciaCarritoProducto = setDefaultUno(farmaciaCarritoProducto);
 				
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto.getPrecioUnitario()));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto.getId()));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProductoCantidad#", String.valueOf(producto.getId()));
 				
 				String totalDeProductos = productosEnElCarrito + " " + farmaciaCarritoProducto;
-				total += Double.parseDouble(String.valueOf(producto.getPrecioUnitario()));
+				total += Double.parseDouble(String.valueOf(producto.getPrecioUnitario().doubleValue() * producto.getCantidad()));
 				
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#direccionAEntregar#", direccionAEntregar);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", totalDeProductos);
@@ -162,6 +173,7 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 		}else{
 			if(producto != null){
 				
+				producto.setCantidad(1);
 				ProductoOrden prodOrden = new ProductoOrden();
 				if(orden.getProductoOrden() == null){
 					orden.setProductoOrden(new ArrayList<ProductoOrden>());
@@ -172,11 +184,13 @@ public class AgregarAlCarritoServlet extends HttpServlet {
 				orden.getProductoOrden().add(prodOrden);
 				
 				String farmaciaCarritoProducto =  Parameters.getParameter("farmaciaCarritoProducto");
+				farmaciaCarritoProducto = setDefaultUno(farmaciaCarritoProducto);
 				
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#NombreProducto#",producto.getNombre());
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#PrecioProducto#",String.valueOf(producto.getPrecioUnitario()));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idFarmacia#", String.valueOf(farmaciaId));
 				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProducto#", String.valueOf(producto.getId()));
+				farmaciaCarritoProducto = farmaciaCarritoProducto.replace("#idProductoCantidad#", String.valueOf(producto.getId()));
 				
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#direccionAEntregar#", direccionAEntregar);
 				farmaciaCarritoStructura = farmaciaCarritoStructura.replace("#productosEnElCarrito#", farmaciaCarritoProducto);
@@ -193,5 +207,35 @@ public class AgregarAlCarritoServlet extends HttpServlet {
         rd.forward(request, response);
         
 	}	
+	
+	public String setDefaultUno(String str_row){
+		
+		str_row = str_row.replace("#selectedItemRow1#", "selected='selected'");
+		
+		for (int i = 1; i < 10; i++) {
+			int iter = i + 1;
+			String buscarToReplace = "#selectedItemRow" + iter + "#";
+			str_row = str_row.replace(buscarToReplace, "");
+		}
+		
+		return str_row;
+	}
+	
+	public String setSelectedProduct(String str_row, int cant){
+		if(cant > 10 || cant <1){
+			return setDefaultUno(str_row);
+		}else{
+			for (int i = 0; i < 10; i++) {
+				int iter = i + 1;
+				if(iter == cant){
+					str_row = str_row.replace("#selectedItemRow" + iter + "#", "selected='selected'");
+				}else{
+					String buscarToReplace = "#selectedItemRow" + iter + "#";
+					str_row = str_row.replace(buscarToReplace, "");
+				}
+			}
+			return str_row;
+		}
+	}
 
 }

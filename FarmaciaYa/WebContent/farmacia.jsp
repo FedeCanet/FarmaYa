@@ -9,7 +9,38 @@
 <link rel="stylesheet" href="css/estilos.css">
 <title>Farmacia</title>
 </head>
+
+
+
+<script>
+function loadImage() {
+	document.getElementById("buttonhid").click();
+
+
+}
+</script>
+
+<%
+
+if (request.getAttribute("comproProperty") == null)
+{
+%>
+
 <body>
+
+<%
+} else {
+%>
+
+ <body onload="loadImage()">
+
+<%
+}
+%>
+
+
+
+
 <%
 //allow access only if session exists
 String user = null;
@@ -102,6 +133,54 @@ for(Cookie cookie : cookies){
 	</div>
 		<hr>
 
+
+			<button class="btn btn-primary btn-lg" style="visibility: hidden;" id="buttonhid" data-toggle="modal" data-target="#myModal">
+			  Launch
+			</button>
+
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <!-- <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        
+			        <h4 class="modal-title" id="myModalLabel">Confirmación de compra</h4>
+			        
+			      </div>
+			      <div class="modal-body">
+			      	<img class="radius-fix" data-original="images/fast_delivery.jpg" src="images/fast_delivery.jpg" alt="delivery rapido" title="delivery rapido">
+			       Gracias por su compra!!
+			       Tiempo estimado de envío 40 minutos...
+			      </div>
+			      <div class="modal-footer">
+			      		<button type="button" style="float:left; margin-left:190px;"class="btn btn-default" onclick="javascript:window.location.href = 'inicio.jsp';" data-dismiss="modal">Buscar otra Farmacia?</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+
+			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				        <h4 class="modal-title" id="myModalLabel"><img class="radius-fix" data-original="images/delivery.jpg" src="images/delivery.jpg" alt="Delivery" title="Delivery"> Medios de Pago</h4>
+			      </div>
+			      <div class="modal-body">
+			      	<h5 class="modal-title" id="myModalLabel"><img class="radius-fix" data-original="images/cash.png" src="images/cash.png" alt="Efectivo" title="Efectivo"> Efectivo</h5>		
+			       	<h5 class="modal-title" id="myModalLabel"><img class="radius-fix" data-original="images/ticket.png" src="images/ticket.png" alt="Ticket Alimentacion" title="Ticket Alimentacion"> Ticket Alimentacion</5>
+			      </div>
+			      <div class="modal-footer">
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+
+
+
 		<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -110,9 +189,6 @@ for(Cookie cookie : cookies){
 				</div>
 				<div class="col-xs-6">
 					<ul class="list-inline text-right">
-						<li><a href="#">Inicio</a></li>
-						<li><a href="#">Mis Calificaciones</a></li>
-						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
 			</div>

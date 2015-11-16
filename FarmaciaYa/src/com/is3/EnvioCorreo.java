@@ -86,8 +86,8 @@ public class EnvioCorreo {
 		String listaPedido = "<table>";
 		for (ProductoOrden produOrden : orden.getProductoOrden()) {
 			Producto p = produOrden.getProducto();
-			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td></tr>";
-			total = total.add(p.getPrecioUnitario());
+			listaPedido += "<tr><td>"+p.getNombre()+"</td><td>"+p.getPrecioUnitario().toString()+"</td><td> Cantidad: " + p.getCantidad() + "</td></tr>";
+			total = total.add(new BigDecimal(p.getPrecioUnitario().doubleValue() * p.getCantidad()));
 		}
 		listaPedido += "<tr><td style=\"height: 20px;\"></td><td></td></tr>";
 		listaPedido += "<tr><td>Total</td><td>"+total.toString()+"</td></tr></table>";

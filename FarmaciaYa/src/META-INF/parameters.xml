@@ -26,7 +26,6 @@
 	</pedidoRegistradoBody>
 	<resultadodebusquedapresentacion>
 	    <![CDATA[
-	            <!-- Page Resultado de Busqueda Presentacion -->
 		        <div class="row">
 		            <div class="col-lg-12">
 		                <h1 class="page-header">Farmacias
@@ -34,9 +33,18 @@
 		                </h1>
 		            </div>
 		        </div>
-		        <!-- /.row -->
 	    ]]>
 	</resultadodebusquedapresentacion>
+	
+	<resultadodebusquedaNoEncontradoPresentacion>
+	    <![CDATA[
+	    	<div id="noEncontrado"  style="overflow: hidden; border: 1px dashed #0E80E2; border-radius: 3px; padding: 1.3em 1em; background: #C1BFB7;     color: #4e452b; line-height: 1.4em; display: block; font-size: 1.1rem; margin: .8em .01em; text-align: center;     font-weight: 700;">
+				<h4>No encontramos Farmacias que coincidan con tu búsqueda "<b>#busquedaProductoOFarmacia#</b>" con delivery para tu ubicación.</h4>
+				<button onclick="showDiv('noEncontrado')" title="Cerrar">Cerrar</button>
+			</div>
+	    ]]>
+	</resultadodebusquedaNoEncontradoPresentacion>
+	
 	<resultadodebusqueda>
 	    <![CDATA[
 	    <!-- Resultado de Busqueda One, Two... -->
@@ -54,6 +62,11 @@
                     <span><small>#direccion#</small></span>
                 </span>
                 <span>
+					<div title="Puntaje de la Farmacia">
+                        <i>Puntaje</i>
+                            <small><span class="glyphicon glyphicon-star"></span> #puntaje#</small>                    
+                    </div>
+                
                     <div title="El tiempo estimado de entrega es de 30-45 mins">
                         <i>30-45 mins</i>
                             <small>tiempo de entrega</small>                    
@@ -88,7 +101,6 @@
 						</p></small>
 				</h1>
 
-				<!-- First Blog Post -->
 				<p>
 					<span class="glyphicon glyphicon-star"></span> Puntaje #Puntaje#
 				</p>
@@ -105,7 +117,7 @@
 						<span class="glyphicon glyphicon-usd"></span> #ImporteMinimo# <small>pedido
 							mínimo</small>
 					</p>
-					<button class="btn btn-success">Ver medios de pago</button>
+					<button class="btn btn-success" data-toggle="modal" data-target="#myModal2">Ver medios de pago</button>
 				</div>
 	]]>
 	</farmaciaPresentacion>
@@ -191,18 +203,21 @@
 		<li title="Editar" class="">
 		<div class="productQuantity dropdown"
 			title="Seleccionar cantidad">
-			<select name="qty_1610399" class="" id="qty_1610399">
-				<option value="1" selected="selected">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-			</select>
+			<form action="ActualizarCantidadItemCarrito" method="POST">
+				<input type="hidden" name="idProductoCantidad" value="#idProductoCantidad#"/>
+				<select name="qty_1610399" class="" id="qty_1610399" onchange="this.form.submit()">
+					<option value="1" #selectedItemRow1#>1</option>
+					<option value="2" #selectedItemRow2#>2</option>
+					<option value="3" #selectedItemRow3#>3</option>
+					<option value="4" #selectedItemRow4#>4</option>
+					<option value="5" #selectedItemRow5#>5</option>
+					<option value="6" #selectedItemRow6#>6</option>
+					<option value="7" #selectedItemRow7#>7</option>
+					<option value="8" #selectedItemRow8#>8</option>
+					<option value="9" #selectedItemRow9#>9</option>
+					<option value="10" #selectedItemRow10#>10</option>
+				</select>
+			</form>
 		</div>
 		<div class="name">#NombreProducto#</div>
 		<div class="price">$#PrecioProducto#</div>
@@ -261,6 +276,7 @@
                   <form action="PuntuarServlet" method="post" class="form-horizontal">
                       <div class="form-group">
                           <p>#nombreFarmacia#</p>
+                          <p><span class="glyphicon glyphicon-star"></span> Puntaje #Puntaje#</p>
                           <p>Pedido:  #elPedido# </p>
                           <p>Fecha: #fechaPedido#</p>
                           <div class="col-md-10 columns">
@@ -307,6 +323,7 @@
                   <form class="form-horizontal">
                       <div class="form-group">
                           <p>#nombreFarmacia#</p>
+                          <p><span class="glyphicon glyphicon-star"></span> Puntaje #Puntaje#</p>
                           <p>Pedido:  #elPedido# </p>
                           <p>Fecha: #fechaPedido# </p>
                           <div class="col-md-10 columns">

@@ -113,5 +113,13 @@
     <url-pattern>/ActualizarContrasena</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>Hello13</servlet-name>
+    <servlet-class>com.is3.ActualizarCantidadItemCarrito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hello13</servlet-name>
+    <url-pattern>/ActualizarCantidadItemCarrito</url-pattern>
+  </servlet-mapping>  
   
 </web-app>

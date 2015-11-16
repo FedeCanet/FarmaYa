@@ -9,6 +9,13 @@
 <title>Resultado de Busqueda</title>
 </head>
 <body>
+
+<script type="text/javascript">
+		function showDiv(divACerrar){
+			document.getElementById(divACerrar).style.display = 'none';
+	}
+</script>
+
 <%
 //allow access only if session exists
 String user = null;
@@ -29,6 +36,9 @@ for(Cookie cookie : cookies){
 
 	<div class="container">
 		<%=request.getAttribute("resultadodebusquedaPresentacion")%>
+		
+		<%=request.getAttribute("resultadodebusquedaNoEncontradoPresentacion")%>
+				
 		<%=request.getAttribute("resultadodebusqueda")%>
 	</div>
 
@@ -40,9 +50,6 @@ for(Cookie cookie : cookies){
 				</div>
 				<div class="col-xs-6">
 					<ul class="list-inline text-right">
-						<li><a href="#">Inicio</a></li>
-						<li><a href="#">Mis Calificaciones</a></li>
-						<li><a href="#">Contacto</a></li>
 					</ul>
 				</div>
 			</div>

@@ -28,6 +28,7 @@ function showDireccion(position) {
 		document.getElementById("locationform").submit();
 		}
 </script>
+
 <body>
 
 <%
@@ -120,7 +121,7 @@ for(Cookie cookie : cookies){
 			</div>
 		</div>
 	</section>
-	
+		
 <%@include file="Includes/footer.jsp" %>	
 
 	<script src="js/jquery.js"></script>
